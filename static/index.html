@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora 🪐</title>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script> -->
+
+    <script> 
+
+        function get_timestamp() {
+            // Create a new Date object
+            let now = new Date();
+
+            // Get the year, month, and day
+            let year = now.getFullYear();
+            let month = now.getMonth() + 1;
+            let day = now.getDate();
+
+            // Get the hours, minutes, and seconds
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+
+            // Add leading zeros to single-digit values
+            if (month < 10) { month = '0' + month; }
+            if (day < 10) { day = '0' + day; }
+            if (hours < 10) { hours = '0' + hours; }
+            if (minutes < 10) { minutes = '0' + minutes; }
+            if (seconds < 10) { seconds = '0' + seconds; }
+
+            // Create the formatted timestamp string
+            return timestamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+        }
+
+        function SendData() {
+
+            event.preventDefault(); // Prevent the form from submitting in the normal way
+
+            // get all the checkboxes
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:not(#send_colour)');
+
+            // create an empty array to store the checked values
+            const checkedValues = [];
+
+            // loop through each checkbox
+            checkboxes.forEach(function(checkbox) {
+            // check if the checkbox is checked
+            if (checkbox.checked) {
+                // add the checkbox value to the array of checked values
+                checkedValues.push(checkbox.value);
+            }
+            });
+
+            var data;
+
+            const breast_milk_time = parseInt(document.getElementById('breast_milk_mins').value);
+            const breast_milk_mls = parseInt(document.getElementById('breast_milk_mls').value);
+            const formula_milk_mls = parseInt(document.getElementById('formula_milk_mls').value);
+            const send_colour = document.getElementById("send_colour").checked;
+            const colour = document.getElementById("colour_box").value;
+            const send_activites = checkedValues.length;
+            const time_stamp = get_timestamp();
+
+            data = {
+                ...data,
+                "baby_id" : 1,
+                "activities" : send_activites ? checkedValues : undefined,
+                "colour" : send_colour ? colour : undefined,
+                "breast_milk_time" : breast_milk_time ? breast_milk_time : 0,
+                "breast_milk_mls" : breast_milk_mls ? breast_milk_mls : 0,
+                "formula_milk_mls" : formula_milk_mls ? formula_milk_mls : 0,
+                "time" : timestamp,
+            }
+
+            fetch('http://127.0.1:8090/get_post_content', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                document.querySelector('form').reset(); // Reset the form once data has been submitted
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+
+        }
+
+        function update_time() {
+            let timestamp = get_timestamp();
+
+            document.getElementById('current_time').textContent = "Current Time: " + timestamp;
+        }
+
+        setInterval(update_time, 1000);
+        
+    </script>
+</head>
+<body>
+
+    <form method="post" onsubmit="SendData()">
+        <div id="Outputs">
+            
+            <h2>
+                Outputs:
+            </h2>
+
+                <label>
+                    <input type="checkbox" name = "event" value="pood">
+                    Poo
+                </label>
+
+                <label>
+                    <input type="checkbox" name = "event" value="weed">
+                    Wee
+                </label>
+
+                <label>
+                    <input type="checkbox" name = "event" value="has_blood">
+                    Blood
+                </label>
+
+                <label>
+                    <input type="checkbox" name = "event" value="vomited">
+                    Vomit
+                </label>
+                <br>
+                <label>
+                    Colour: <input type="color" id = "colour_box" value="#000000">
+                </label>
+                <br>
+                <label>
+                    Send Colour? <input type="checkbox" id = "send_colour" value = "send_colour">
+                </label>
+                <br>
+                <label>
+                    <div id="current_time">
+                        Current Time: Refreshing...
+                    </div>
+                </label>
+        </div>    
+
+        <div id="inputs">
+            <h2>
+                Inputs:
+            </h2>
+
+                <p>
+                    <label>
+                        Breast Milk : <input type="number" id="breast_milk_mins" value=""> minutes
+                    </label>
+                    <br>
+                    <label>
+                        Breast Milk (expressed) : <input type="number" id="breast_milk_mls" value=""> ml
+                    </label>
+                    <br>
+                    <label>
+                        Formula Milk : <input type="number" id="formula_milk_mls" value=""> ml
+                    </label>
+
+                </p>
+        </div>
+
+        <input type="submit" value="Submit">
+
+    </form>
+
+</body>
+</html>
