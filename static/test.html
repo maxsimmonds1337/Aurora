@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<body>
+  <form>
+    <label for="date">Select a date:</label>
+    <input type="text" id="date" name="date">
+  </form>
+  
+  <script>
+    flatpickr("#date", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i",
+      defaultDate: new Date()
+    });
+  </script>
+</body>
+</html>

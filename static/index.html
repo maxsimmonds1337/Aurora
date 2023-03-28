@@ -5,11 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aurora 🪐</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script> -->
 
+
+    <script>
+        flatpickr("#date", {
+          enableTime: true,
+          dateFormat: "Y-m-d H:i",
+          defaultDate: new Date()
+        });
+      </script>
+
     <script> 
+
+        flatpickr("#datetime_picker", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            defaultDate: new Date()
+        });
+
 
         function get_timestamp() {
             // Create a new Date object
@@ -64,7 +83,7 @@
             const send_colour = document.getElementById("send_colour").checked;
             const colour = document.getElementById("colour_box").value;
             const send_activites = checkedValues.length;
-            const time_stamp = get_timestamp();
+            const time_stamp = document.getElementById("current_time").value;
 
             data = {
                 ...data,
@@ -96,9 +115,16 @@
         }
 
         function update_time() {
-            let timestamp = get_timestamp();
 
-            document.getElementById('current_time').textContent = "Current Time: " + timestamp;
+            const datetimePicker = document.getElementById('datetime_picker');
+            const selectedDate = new Date(datetimePicker.value);
+
+            if (!isNaN(selectedDate.getTime())) {
+                const time_string = selectedDate.toLocaleTimeString();
+                const date_string = selectedDate.toLocaleDateString();
+                document.getElementById('current_time').textContent = "Selected Date and Time: " + date_string + " " + time_string;
+            }
+
         }
 
         setInterval(update_time, 1000);
@@ -143,9 +169,8 @@
                 </label>
                 <br>
                 <label>
-                    <div id="current_time">
-                        Current Time: Refreshing...
-                    </div>
+                    Choose a date and time? 
+                    <input type="text" id="datetime_picker" name="current_time">
                 </label>
         </div>    
 
