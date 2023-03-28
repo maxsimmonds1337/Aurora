@@ -63,30 +63,20 @@
             })
             .then(response => response.json())
             .then(data => {
-                console.log('Success:', data);
+                console.log('Success');
                 document.querySelector('form').reset(); // Reset the form once data has been submitted
+                flatpickr("#date", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i:s",
+                defaultDate: new Date()
+                });
             })
             .catch((error) => {
             console.error('Error:', error);
             });
 
         }
-
-        // function update_time() {
-
-        //     const datetimePicker = document.getElementById('datetime_picker');
-        //     const selectedDate = new Date(datetimePicker.value);
-
-        //     if (!isNaN(selectedDate.getTime())) {
-        //         const time_string = selectedDate.toLocaleTimeString();
-        //         const date_string = selectedDate.toLocaleDateString();
-        //         document.getElementById('date').textContent = "Selected Date and Time: " + date_string + " " + time_string;
-        //     }
-
-        // }
-
-        // setInterval(update_time, 1000);
-        
+ 
     </script>
 </head>
 <body>
