@@ -12,49 +12,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script> -->
 
-
-    <script>
-        flatpickr("#date", {
-          enableTime: true,
-          dateFormat: "Y-m-d H:i",
-          defaultDate: new Date()
-        });
-      </script>
-
     <script> 
-
-        flatpickr("#datetime_picker", {
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-            defaultDate: new Date()
-        });
-
-
-        function get_timestamp() {
-            // Create a new Date object
-            let now = new Date();
-
-            // Get the year, month, and day
-            let year = now.getFullYear();
-            let month = now.getMonth() + 1;
-            let day = now.getDate();
-
-            // Get the hours, minutes, and seconds
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-            let seconds = now.getSeconds();
-
-            // Add leading zeros to single-digit values
-            if (month < 10) { month = '0' + month; }
-            if (day < 10) { day = '0' + day; }
-            if (hours < 10) { hours = '0' + hours; }
-            if (minutes < 10) { minutes = '0' + minutes; }
-            if (seconds < 10) { seconds = '0' + seconds; }
-
-            // Create the formatted timestamp string
-            return timestamp = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-        }
 
         function SendData() {
 
@@ -83,7 +41,7 @@
             const send_colour = document.getElementById("send_colour").checked;
             const colour = document.getElementById("colour_box").value;
             const send_activites = checkedValues.length;
-            const time_stamp = document.getElementById("current_time").value;
+            const time_stamp = document.getElementById("date").value;
 
             data = {
                 ...data,
@@ -93,7 +51,7 @@
                 "breast_milk_time" : breast_milk_time ? breast_milk_time : 0,
                 "breast_milk_mls" : breast_milk_mls ? breast_milk_mls : 0,
                 "formula_milk_mls" : formula_milk_mls ? formula_milk_mls : 0,
-                "time" : timestamp,
+                "time" : time_stamp,
             }
 
             fetch('http://127.0.1:8090/get_post_content', {
@@ -114,20 +72,20 @@
 
         }
 
-        function update_time() {
+        // function update_time() {
 
-            const datetimePicker = document.getElementById('datetime_picker');
-            const selectedDate = new Date(datetimePicker.value);
+        //     const datetimePicker = document.getElementById('datetime_picker');
+        //     const selectedDate = new Date(datetimePicker.value);
 
-            if (!isNaN(selectedDate.getTime())) {
-                const time_string = selectedDate.toLocaleTimeString();
-                const date_string = selectedDate.toLocaleDateString();
-                document.getElementById('current_time').textContent = "Selected Date and Time: " + date_string + " " + time_string;
-            }
+        //     if (!isNaN(selectedDate.getTime())) {
+        //         const time_string = selectedDate.toLocaleTimeString();
+        //         const date_string = selectedDate.toLocaleDateString();
+        //         document.getElementById('date').textContent = "Selected Date and Time: " + date_string + " " + time_string;
+        //     }
 
-        }
+        // }
 
-        setInterval(update_time, 1000);
+        // setInterval(update_time, 1000);
         
     </script>
 </head>
@@ -170,8 +128,8 @@
                 <br>
                 <label>
                     Choose a date and time? 
-                    <input type="text" id="datetime_picker" name="current_time">
                 </label>
+                <input type="text" id="date" name="date">
         </div>    
 
         <div id="inputs">
@@ -200,4 +158,13 @@
     </form>
 
 </body>
+
+<script>
+    flatpickr("#date", {
+      enableTime: true,
+      dateFormat: "Y-m-d H:i:s",
+      defaultDate: new Date()
+    });
+</script>
+
 </html>
