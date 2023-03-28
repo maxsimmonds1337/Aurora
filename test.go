@@ -82,9 +82,9 @@ func (app *App) insert_data(body_json []byte) {
 
 	fmt.Printf("activities is %s\n", activities)
 
-	activities = "weed"
+	// activities = "has_blood"
 
-	fmt.Printf("activities is %s\n", activities)
+	// fmt.Printf("activities is %s and is of type %T\n", activities, activities)
 
 	colour := baby_log.Colour
 	breast_milk_time := baby_log.Breast_milk_time
