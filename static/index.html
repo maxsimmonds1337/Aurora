@@ -65,11 +65,7 @@
             .then(data => {
                 console.log('Success');
                 document.querySelector('form').reset(); // Reset the form once data has been submitted
-                flatpickr("#date", {
-                enableTime: true,
-                dateFormat: "Y-m-d H:i:s",
-                defaultDate: new Date()
-                });
+                update_time();
             })
             .catch((error) => {
             console.error('Error:', error);
@@ -150,11 +146,16 @@
 </body>
 
 <script>
-    flatpickr("#date", {
-      enableTime: true,
-      dateFormat: "Y-m-d H:i:s",
-      defaultDate: new Date()
-    });
+    function update_time()
+    {
+        flatpickr("#date", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i:s",
+        defaultDate: new Date()
+        });
+    }
+
+    setInterval(update_time, 1000);
 </script>
 
 </html>
