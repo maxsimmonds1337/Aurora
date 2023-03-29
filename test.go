@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -109,7 +110,9 @@ type App struct {
 func main() {
 
 	// Open a database connection
-	db, err := sql.Open("mysql", "root:my-secret-pw@tcp(localhost:3306)/aurora")
+	GCP_USER := os.Getenv("GCP_USER")
+	GCP_PASS := os.Getenv("GCP_PASS")
+	db, err := sql.Open("mysql", GCP_USER+":"+GCP_PASS+"@tcp(34.88.227.198:3306)/aurora")
 	if err != nil {
 		panic(err.Error())
 	}
