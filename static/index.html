@@ -14,6 +14,8 @@
 
     <script> 
 
+        let cal_open = false;
+
         function SendData() {
 
             event.preventDefault(); // Prevent the form from submitting in the normal way
@@ -115,7 +117,7 @@
                 <label>
                     Choose a date and time? 
                 </label>
-                <input type="text" id="date" name="date">
+                <input type="text" id="date" name="date" onclick="cal_open=true">
         </div>    
 
         <div id="inputs">
@@ -146,16 +148,36 @@
 </body>
 
 <script>
-    function update_time()
-    {
-        flatpickr("#date", {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i:s",
-        defaultDate: new Date()
-        });
-    }
 
-    setInterval(update_time, 1000);
+let intervalId;
+let userChanged = false;
+
+const fp = flatpickr("#date", {
+  enableTime: true,
+  dateFormat: "Y-m-d H:i:s",
+  defaultDate: new Date(),
+  onOpen: function(selectedDates, dateStr, instance) {
+    clearInterval(intervalId);
+  },
+  onClose: function(selectedDates, dateStr, instance) {
+    if (!userChanged) {
+      intervalId = setInterval(function() {
+        instance.setDate(new Date(), false);
+      }, 1000);
+    }
+    userChanged = false;
+  },
+  onChange: function(selectedDates, dateStr, instance) {
+    userChanged = true;
+  }
+});
+
+intervalId = setInterval(function() {
+  fp.setDate(new Date(), false);
+}, 1000);
+
+
+
 </script>
 
 </html>
