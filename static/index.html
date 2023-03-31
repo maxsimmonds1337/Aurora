@@ -66,8 +66,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success');
-                document.querySelector('form').reset(); // Reset the form once data has been submitted
-                update_time();
+                location.reload();
+
             })
             .catch((error) => {
             console.error('Error:', error);
