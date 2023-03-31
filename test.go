@@ -110,9 +110,9 @@ type App struct {
 func main() {
 
 	// Open a database connection
-	GCP_USER := os.Getenv("GCP_USER")
-	GCP_PASS := os.Getenv("GCP_PASS")
-	db, err := sql.Open("mysql", GCP_USER+":"+GCP_PASS+"@tcp(34.88.227.198:3306)/aurora")
+	// GCP_USER := os.Getenv("GCP_USER")
+	// GCP_PASS := os.Getenv("GCP_PASS")
+	db, err := sql.Open("mysql", "root:ho;<6G#)A&+didEg@tcp(10.51.32.3:3306)/aurora")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -133,6 +133,8 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
 
-	http.ListenAndServe(":8090", nil)
+	PORT := os.Getenv("PORT")
+
+	http.ListenAndServe(":"+PORT, nil)
 
 }
