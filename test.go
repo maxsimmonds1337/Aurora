@@ -114,6 +114,9 @@ func main() {
 	GCP_PASS := os.Getenv("GCP_PASS")
 	HOST := os.Getenv("HOST")
 	DB_PORT := os.Getenv("DB_PORT")
+	PORT := os.Getenv("PORT")
+
+	fmt.Printf("user %v pass %v host %v DB_PORT %v port %v\n", GCP_USER, GCP_PASS, HOST, DB_PORT, PORT)
 
 	db, err := sql.Open("mysql", GCP_USER+":"+GCP_PASS+"@tcp("+HOST+":"+DB_PORT+")/aurora")
 	if err != nil {
@@ -135,8 +138,6 @@ func main() {
 	// Set up a file server to serve static files from the "static" directory
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
-
-	PORT := os.Getenv("PORT")
 
 	http.ListenAndServe(":"+PORT, nil)
 
