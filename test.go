@@ -110,9 +110,12 @@ type App struct {
 func main() {
 
 	// Open a database connection
-	// GCP_USER := os.Getenv("GCP_USER")
-	// GCP_PASS := os.Getenv("GCP_PASS")
-	db, err := sql.Open("mysql", "root:ho;<6G#)A&+didEg@tcp(10.51.32.3:3306)/aurora")
+	GCP_USER := os.Getenv("GCP_USER")
+	GCP_PASS := os.Getenv("GCP_PASS")
+	HOST := os.Getenv("HOST")
+	DB_PORT := os.Getenv("DB_PORT")
+
+	db, err := sql.Open("mysql", GCP_USER+":"+GCP_PASS+"@tcp("+HOST+":"+DB_PORT+")/aurora")
 	if err != nil {
 		panic(err.Error())
 	}
