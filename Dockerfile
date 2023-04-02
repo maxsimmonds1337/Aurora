@@ -1,9 +1,5 @@
 # Use an official Golang runtime as a parent image
-FROM golang:latest
-
-ENV GOARCH=arm
-ENV GOOS=linux
-
+FROM --platform=linux/amd64 golang:latest
 
 # Set the working directory to /app
 WORKDIR /app
