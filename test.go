@@ -7,6 +7,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -109,7 +110,15 @@ type App struct {
 func main() {
 
 	// Open a database connection
-	db, err := sql.Open("mysql", "root:my-secret-pw@tcp(localhost:3306)/aurora")
+	GCP_USER := os.Getenv("GCP_USER")
+	GCP_PASS := os.Getenv("GCP_PASS")
+	HOST := os.Getenv("HOST")
+	DB_PORT := os.Getenv("DB_PORT")
+	PORT := os.Getenv("PORT")
+
+	fmt.Printf("user %v pass %v host %v DB_PORT %v port %v\n", GCP_USER, GCP_PASS, HOST, DB_PORT, PORT)
+
+	db, err := sql.Open("mysql", GCP_USER+":"+GCP_PASS+"@tcp("+HOST+":"+DB_PORT+")/aurora")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -130,6 +139,6 @@ func main() {
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/", fs)
 
-	http.ListenAndServe(":8090", nil)
+	http.ListenAndServe(":"+PORT, nil)
 
 }
