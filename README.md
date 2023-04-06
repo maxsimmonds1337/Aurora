@@ -14,4 +14,6 @@
 - Data visuals
 - metrics (how much formula in 24 period, how many wees, poos, in 24 hour period)
 - Nappy utilisation, add in when new nappies are bought, edtimate number left (reduction every time a reauest is sent)
+- 3 hour reminder to log feeds, reset when a feed is logged
+- push notifications for things like feeds etc
 - 
