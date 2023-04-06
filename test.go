@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"html/template"
 	"io"
 	"log"
 	"net/http"
@@ -12,6 +13,11 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 )
+
+type Data struct {
+	Name string
+	Age  int
+}
 
 // function to get the contents of the posted data
 // this should be a json string of activities, colour, milk inputs, etc
@@ -27,24 +33,41 @@ func (app *App) get_post_content(w http.ResponseWriter, req *http.Request) {
 	//upon exiting the function, close the body request
 	defer req.Body.Close()
 
-	// declare a variable called data which is a list of string keys with an undefined values (since the json can be anything)
-	// var data map[string]interface{}
-	// if err := json.Unmarshal(body, &data); err != nil { // here we unflatten the body into the data variable, and capture any errors
-	// 	http.Error(w, "Error decoding request body", http.StatusBadRequest)
-	// 	return
-	// }
-
-	// body_json, err := json.Marshal(body)
-	// if err != nil {
-	// 	http.Error(w, "Error encoding request body", http.StatusBadRequest)
-	// }
-
 	app.insert_data(body)
 
 	// if no errors, then we set the headers in the http response writer
 	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode("data"); err != nil { // here, we make a json encoder that will write to the response writer, and encode the data back into json
 		http.Error(w, "Error encoding response", http.StatusInternalServerError)
+		return
+	}
+}
+
+func (app *App) data(w http.ResponseWriter, req *http.Request) {
+
+	data := Data{Name: "Aurora", Age: 0}
+
+	tpl, err := template.New("test").Parse(`
+				<html>
+					<head>
+						<title>{{.Name}}'s profile</title>
+					</head>
+					<body>
+						<h1>{{.Name}} is...</h1>
+						<p>Age: {{.Age}} years old!</p>
+					</body>
+				</html>
+			`)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = tpl.Execute(w, data)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
@@ -134,6 +157,7 @@ func main() {
 	fmt.Println("Successfully connected to the database!")
 
 	http.HandleFunc("/get_post_content", app.get_post_content)
+	http.HandleFunc("/data", app.data)
 
 	// Set up a file server to serve static files from the "static" directory
 	fs := http.FileServer(http.Dir("static"))
