@@ -94,60 +94,67 @@
     <form method="post" onsubmit="SendData()">
         <div id="Outputs">
 
-            <h2 translation = "en">
+            <h2 translation="en">
                 Outputs:
             </h2>
 
             <label>
                 <input type="checkbox" name="event" value="pooped">
-                Poo
+                <label translation="en">Poo</label>
             </label>
 
             <label>
                 <input type="checkbox" name="event" value="peed">
-                Wee
+                <label translation="en">Wee</label>
             </label>
 
             <label>
                 <input type="checkbox" name="event" value="had_blood">
-                Blood
+                <label translation="en">Blood</label>
             </label>
 
             <label>
                 <input type="checkbox" name="event" value="vomited">
-                Vomit
+                <label translation="en">Vomit</label>
             </label>
             <br>
             <label>
-                Colour: <input type="color" id="colour_box" value="#000000">
+                <label translation="en">Colour</label>
+                <input type="color" id="colour_box" value="#000000">
             </label>
             <br>
             <label>
-                Send Colour? <input type="checkbox" id="send_colour" value="send_colour">
+                <label translation="en">Send Colour?</label><input type="checkbox" id="send_colour" value="send_colour">
             </label>
             <br>
             <label>
-                Choose a date and time?
+                <label translation="en">
+                    Choose a date and time?
+                </label>
             </label>
             <input type="text" id="date" name="date" onclick="cal_open=true">
         </div>
 
         <div id="inputs">
-            <h2>
+            <h2 translation="en">
                 Inputs:
             </h2>
 
             <p>
                 <label>
-                    Breast Milk : <input type="number" id="breast_milk_mins" value=""> minutes
+                    <label translation="en">Breast Milk :</label> <input type="number" id="breast_milk_mins" value="">
+                    <label translation="en">minutes</label>
                 </label>
                 <br>
                 <label>
-                    Breast Milk (expressed) : <input type="number" id="breast_milk_mls" value=""> ml
+                    <label translation="en">Breast Milk (expressed) :</label> <input type="number" id="breast_milk_mls"
+                        value="">
+                    <label translation="en">ml</label>
                 </label>
                 <br>
                 <label>
-                    Formula Milk : <input type="number" id="formula_milk_mls" value=""> ml
+                    <label translation="en">Formula Milk :</label><input type="number" id="formula_milk_mls" value="">
+                    <label translation="en">ml</label>
                 </label>
 
             </p>
@@ -166,13 +173,42 @@
 
     const translations = {
 
-            "en" : {
-                "Выходные данные:" : "Outputs:"
-            },
-            "ru" : {
-                "Outputs:": "Выходные данные:"
-            }
-          }
+
+        "en": {
+            "Выходные данные:": "Outputs:",
+            "Какашки": "Poo",
+            "Моча": "Wee",
+            "Кровь": "Blood",
+            "Рвота": "Vomit",
+            "Цвет:": "Colour",
+            "Отправить цвет?": "Send Colour?",
+            "Выберите дату и время": "Choose a date and time?",
+            "Входные данные:": "Inputs:",
+            "Грудное молоко:": "Breast Milk :",
+            "Грудное молоко (выраженное):": "Breast Milk (expressed) :",
+            "Формула молока:": "Formula Milk :",
+            "минут": "minutes",
+            "мл": "ml",
+            "Отправить": "Submit"
+        },
+        "ru": {
+            "Outputs:": "Выходные данные:",
+            "Poo": "Какашки",
+            "Wee": "Моча",
+            "Blood": "Кровь",
+            "Vomit": "Рвота",
+            "Colour": "Цвет:",
+            "Send Colour?": "Отправить цвет?",
+            "Choose a date and time?": "Выберите дату и время",
+            "Inputs:": "Входные данные:",
+            "Breast Milk :": "Грудное молоко:",
+            "Breast Milk (expressed) :": "Грудное молоко (выраженное):",
+            "Formula Milk :": "Формула молока:",
+            "minutes": "минут",
+            "ml": "мл",
+            "Submit": "Отправить"
+        }
+    }
 
     let slider = document.getElementById("lang_button");
 
