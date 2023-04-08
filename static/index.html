@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aurora 🪐</title>
-    
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="./CSS/styles.css">
+
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script> -->
 
-    <script> 
+    <script>
 
         let cal_open = false;
 
@@ -27,12 +34,12 @@
             const checkedValues = [];
 
             // loop through each checkbox
-            checkboxes.forEach(function(checkbox) {
-            // check if the checkbox is checked
-            if (checkbox.checked) {
-                // add the checkbox value to the array of checked values
-                checkedValues.push(checkbox.value);
-            }
+            checkboxes.forEach(function (checkbox) {
+                // check if the checkbox is checked
+                if (checkbox.checked) {
+                    // add the checkbox value to the array of checked values
+                    checkedValues.push(checkbox.value);
+                }
             });
 
             var data;
@@ -47,98 +54,110 @@
 
             data = {
                 ...data,
-                "baby_id" : 1,
-                "activities" : send_activites ? checkedValues : undefined,
-                "colour" : send_colour ? colour : undefined,
-                "breast_milk_time" : breast_milk_time ? breast_milk_time : 0,
-                "breast_milk_mls" : breast_milk_mls ? breast_milk_mls : 0,
-                "formula_milk_mls" : formula_milk_mls ? formula_milk_mls : 0,
-                "time" : time_stamp,
+                "baby_id": 1,
+                "activities": send_activites ? checkedValues : undefined,
+                "colour": send_colour ? colour : undefined,
+                "breast_milk_time": breast_milk_time ? breast_milk_time : 0,
+                "breast_milk_mls": breast_milk_mls ? breast_milk_mls : 0,
+                "formula_milk_mls": formula_milk_mls ? formula_milk_mls : 0,
+                "time": time_stamp,
             }
 
             fetch('/get_post_content', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data),
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data),
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success');
-                location.reload();
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success');
+                    location.reload();
 
-            })
-            .catch((error) => {
-            console.error('Error:', error);
-            });
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
 
         }
- 
     </script>
 </head>
+
 <body>
+
+    <label class="switch">
+        <input type="checkbox" id="lang_button">
+        <div class="slider round"></div>
+    </label>
 
     <form method="post" onsubmit="SendData()">
         <div id="Outputs">
-            
-            <h2>
+
+            <h2 translation="en">
                 Outputs:
             </h2>
 
-                <label>
-                    <input type="checkbox" name = "event" value="pooped">
-                    Poo
-                </label>
+            <label>
+                <input type="checkbox" name="event" value="pooped">
+                <label translation="en">Poo</label>
+            </label>
 
-                <label>
-                    <input type="checkbox" name = "event" value="peed">
-                    Wee
-                </label>
+            <label>
+                <input type="checkbox" name="event" value="peed">
+                <label translation="en">Wee</label>
+            </label>
 
-                <label>
-                    <input type="checkbox" name = "event" value="had_blood">
-                    Blood
-                </label>
+            <label>
+                <input type="checkbox" name="event" value="had_blood">
+                <label translation="en">Blood</label>
+            </label>
 
-                <label>
-                    <input type="checkbox" name = "event" value="vomited">
-                    Vomit
+            <label>
+                <input type="checkbox" name="event" value="vomited">
+                <label translation="en">Vomit</label>
+            </label>
+            <br>
+            <label>
+                <label translation="en">Colour</label>
+                <input type="color" id="colour_box" value="#000000">
+            </label>
+            <br>
+            <label>
+                <label translation="en">Send Colour?</label><input type="checkbox" id="send_colour" value="send_colour">
+            </label>
+            <br>
+            <label>
+                <label translation="en">
+                    Choose a date and time?
                 </label>
-                <br>
-                <label>
-                    Colour: <input type="color" id = "colour_box" value="#000000">
-                </label>
-                <br>
-                <label>
-                    Send Colour? <input type="checkbox" id = "send_colour" value = "send_colour">
-                </label>
-                <br>
-                <label>
-                    Choose a date and time? 
-                </label>
-                <input type="text" id="date" name="date" onclick="cal_open=true">
-        </div>    
+            </label>
+            <input type="text" id="date" name="date" onclick="cal_open=true">
+        </div>
 
         <div id="inputs">
-            <h2>
+            <h2 translation="en">
                 Inputs:
             </h2>
 
-                <p>
-                    <label>
-                        Breast Milk : <input type="number" id="breast_milk_mins" value=""> minutes
-                    </label>
-                    <br>
-                    <label>
-                        Breast Milk (expressed) : <input type="number" id="breast_milk_mls" value=""> ml
-                    </label>
-                    <br>
-                    <label>
-                        Formula Milk : <input type="number" id="formula_milk_mls" value=""> ml
-                    </label>
+            <p>
+                <label>
+                    <label translation="en">Breast Milk :</label> <input type="number" id="breast_milk_mins" value="">
+                    <label translation="en">minutes</label>
+                </label>
+                <br>
+                <label>
+                    <label translation="en">Breast Milk (expressed) :</label> <input type="number" id="breast_milk_mls"
+                        value="">
+                    <label translation="en">ml</label>
+                </label>
+                <br>
+                <label>
+                    <label translation="en">Formula Milk :</label><input type="number" id="formula_milk_mls" value="">
+                    <label translation="en">ml</label>
+                </label>
 
-                </p>
+            </p>
         </div>
 
         <input type="submit" value="Submit">
@@ -149,33 +168,87 @@
 
 <script>
 
-let intervalId;
-let userChanged = false;
+    let intervalId;
+    let userChanged = false;
 
-const fp = flatpickr("#date", {
-  enableTime: true,
-  dateFormat: "Y-m-d H:i:s",
-  defaultDate: new Date(),
-  onOpen: function(selectedDates, dateStr, instance) {
-    clearInterval(intervalId);
-  },
-  onClose: function(selectedDates, dateStr, instance) {
-    if (!userChanged) {
-      intervalId = setInterval(function() {
-        instance.setDate(new Date(), false);
-      }, 1000);
+    const translations = {
+
+
+        "en": {
+            "Выходные данные:": "Outputs:",
+            "Какашки": "Poo",
+            "Моча": "Wee",
+            "Кровь": "Blood",
+            "Рвота": "Vomit",
+            "Цвет:": "Colour",
+            "Отправить цвет?": "Send Colour?",
+            "Выберите дату и время": "Choose a date and time?",
+            "Входные данные:": "Inputs:",
+            "Грудное молоко:": "Breast Milk :",
+            "Грудное молоко (выраженное):": "Breast Milk (expressed) :",
+            "Формула молока:": "Formula Milk :",
+            "минут": "minutes",
+            "мл": "ml",
+            "Отправить": "Submit"
+        },
+        "ru": {
+            "Outputs:": "Выходные данные:",
+            "Poo": "Какашки",
+            "Wee": "Моча",
+            "Blood": "Кровь",
+            "Vomit": "Рвота",
+            "Colour": "Цвет:",
+            "Send Colour?": "Отправить цвет?",
+            "Choose a date and time?": "Выберите дату и время",
+            "Inputs:": "Входные данные:",
+            "Breast Milk :": "Грудное молоко:",
+            "Breast Milk (expressed) :": "Грудное молоко (выраженное):",
+            "Formula Milk :": "Формула молока:",
+            "minutes": "минут",
+            "ml": "мл",
+            "Submit": "Отправить"
+        }
     }
-    userChanged = false;
-  },
-  onChange: function(selectedDates, dateStr, instance) {
-    userChanged = true;
-  }
-});
 
-intervalId = setInterval(function() {
-  fp.setDate(new Date(), false);
-}, 1000);
+    let slider = document.getElementById("lang_button");
 
+    slider.addEventListener("change", function (event) {
+        const lang = event.target.checked ? "ru" : "en";
+        console.log(lang)
+        const elements = document.querySelectorAll("[translation]")
+        elements.forEach(function (element) {
+            console.log(element)
+            const key = element.innerHTML.trim();
+            const text = translations[lang][key];
+            console.log("key " + key + " text " + text);
+            element.innerHTML = text;
+        });
+    });
+
+    const fp = flatpickr("#date", {
+        disableMobile: "true",
+        enableTime: true,
+        dateFormat: "Y-m-d H:i:s",
+        defaultDate: new Date(),
+        onOpen: function (selectedDates, dateStr, instance) {
+            clearInterval(intervalId);
+        },
+        onClose: function (selectedDates, dateStr, instance) {
+            if (!userChanged) {
+                intervalId = setInterval(function () {
+                    instance.setDate(new Date(), false);
+                }, 1000);
+            }
+            userChanged = false;
+        },
+        onChange: function (selectedDates, dateStr, instance) {
+            userChanged = true;
+        }
+    });
+
+    intervalId = setInterval(function () {
+        fp.setDate(new Date(), false);
+    }, 1000);
 
 
 </script>
