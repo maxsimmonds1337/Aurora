@@ -63,7 +63,7 @@ input:checked + .slider:before {
 
 input:checked + .slider:after
 {  
-  content:'Russian';
+  content:'Русский';
 }
 
 /*--------- END --------*/

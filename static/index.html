@@ -81,21 +81,20 @@
                 });
 
         }
-
     </script>
 </head>
 
 <body>
 
     <label class="switch">
-        <input type="checkbox" id="togBtn">
+        <input type="checkbox" id="lang_button">
         <div class="slider round"></div>
     </label>
 
     <form method="post" onsubmit="SendData()">
         <div id="Outputs">
 
-            <h2>
+            <h2 translation = "en">
                 Outputs:
             </h2>
 
@@ -165,6 +164,31 @@
     let intervalId;
     let userChanged = false;
 
+    const translations = {
+
+            "en" : {
+                "Выходные данные:" : "Outputs:"
+            },
+            "ru" : {
+                "Outputs:": "Выходные данные:"
+            }
+          }
+
+    let slider = document.getElementById("lang_button");
+
+    slider.addEventListener("change", function (event) {
+        const lang = event.target.checked ? "ru" : "en";
+        console.log(lang)
+        const elements = document.querySelectorAll("[translation]")
+        elements.forEach(function (element) {
+            console.log(element)
+            const key = element.innerHTML.trim();
+            const text = translations[lang][key];
+            console.log("key " + key + " text " + text);
+            element.innerHTML = text;
+        });
+    });
+
     const fp = flatpickr("#date", {
         disableMobile: "true",
         enableTime: true,
@@ -189,7 +213,6 @@
     intervalId = setInterval(function () {
         fp.setDate(new Date(), false);
     }, 1000);
-
 
 
 </script>
