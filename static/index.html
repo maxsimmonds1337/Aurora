@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABvElEQVQ4T62TPUsDQRCFv+sBWrbdVVEsEzGwxHJJI0UIjgCIuV7IoQnAKiuKilIVCEGQhDCm1dZaKjA0NbduYaMzy7fduYdNLPM/vP/5znXdzMGi5gu9U5LhQ2BxEIx5n6nq6iCKAiwjk2eSQAECJBU0Wgq3Pv9K4z4Bo4VKpUGWmm+8KvR4CR7LxeLTkxuV7X8B51mbpV7sTzOXoT2fkKjgvgbh0gVJ+f+NNuOfls8X51tZMkVHmTWTaezgBjTXd+uN7FzSrl1AlD+G3qvmvrboj4c4o4NkLYlW8+RwPiYrhu+M0j6B5U5hDvPJFIB2/cutb1jK0W3qyP6oHPCGjpf03x31Jcn9Ov1+eTX1+zHl/YaRu7zyLxOMs7s1srtfT+w7V3qNd9Pj7z+8PPp/Hms6wbZOJ6hfuU6SjU6SjQ6StU4nw9G4+4cYzAGrg2OEP1/EDx5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5v/u8iGRy0RbsPAAAAABJRU5ErkJggg==" type="image/png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +37,7 @@
             // loop through each checkbox
             checkboxes.forEach(function (checkbox) {
                 // check if the checkbox is checked
-                if (checkbox.checked) {
+                if (checkbox.checked && checkbox.getAttribute("id") != "lang_button") {
                     // add the checkbox value to the array of checked values
                     checkedValues.push(checkbox.value);
                 }
