@@ -52,6 +52,7 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 				<html>
 					<head>
 						<title>{{.Name}}'s profile</title>
+						<a href="./index.html">Go back to the submissions</a>
 					</head>
 					<body>
 						<h1>{{.Name}} is...</h1>
