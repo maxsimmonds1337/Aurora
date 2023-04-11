@@ -17,6 +17,7 @@ import (
 type Data struct {
 	Name string
 	Age  int
+	Rows []map[string]interface{}
 }
 
 // function to get the contents of the posted data
@@ -55,7 +56,47 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 					<body>
 						<h1>{{.Name}} is...</h1>
 						<p>Age: {{.Age}} years old!</p>
+
+						<div id = "table_data">
+							<table>
+
+								<thead>
+								<tr>
+								<th>Log ID</th>
+								<th>Baby ID</th>
+								<th>Time</th>
+								<th>Activities</th>
+								<th>colour</th>
+								<th>Breast Milk Time</th>
+								<th>Bresat Milk mls</th>
+								<th>Formula Milk mls</th>
+								</tr>
+								</thead>
+								<tbody>
+								{{range $index, $row := .Rows}}
+                                    <tr>
+										<td class ="centered">{{$row.LogId}}</td>
+                                        <td class ="centered">{{$row.BabyID}}</td>
+                                        <td class ="centered">{{$row.Time}}</td>
+                                        <td class ="centered">{{$row.Activities}}</td>
+                                        <td class ="centered">{{$row.Color}}</td>
+                                        <td class ="centered">{{$row.BreastMilkTime}}</td>
+                                        <td class ="centered">{{$row.BreastMilkMls}}</td>
+                                        <td class ="centered">{{$row.FormulaMilkMls}}</td>
+                                    </tr>
+                                {{end}}
+								</tbody>
+							</table>
+						</div>
 					</body>
+					<style>
+						table, th, td {
+							border: 1px solid black;
+						}
+						.centered {
+							text-align: center;
+						}
+					</style>
 				</html>
 			`)
 
@@ -64,12 +105,55 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	err = tpl.Execute(w, data)
+	rows, err := app.DB.Query("SELECT * FROM baby_logs;")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close() // make sure we remove the memory once the function closes
 
+	var (
+		LogId          int //TODO: make this match the var below
+		BabyID         string
+		Time           string
+		Activities     string
+		Color          string
+		BreastMilkTime []uint8
+		BreastMilkMls  []uint8
+		FormulaMilkMls []uint8
+	)
+
+	var dataRows []map[string]interface{} // this will hold all the rows, once we get a row we append here
+	for rows.Next() {                     //this will loop over each element in the rows object
+		var row = make(map[string]interface{}) // declare a row which is a map of key strings and assorted values, but make it empty
+		// next, scan
+		if err := rows.Scan(&LogId, &BabyID, &Time, &Activities, &Color, &BreastMilkTime, &BreastMilkMls, &FormulaMilkMls); err != nil {
+			log.Fatal(err)
+		}
+
+		row["LogId"] = LogId
+		row["BabyID"] = BabyID
+		row["Time"] = Time
+		row["Activities"] = Activities
+		row["Color"] = Color
+		row["BreastMilkTime"] = string(BreastMilkTime)
+		row["BreastMilkMls"] = string(BreastMilkMls)
+		row["FormulaMilkMls"] = string(FormulaMilkMls)
+
+		dataRows = append(dataRows, row)
+	}
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	data.Rows = dataRows // add the row to Rows
+
+	// execute the template, w is the response writer (which is needed to return the http repsonse) data is the data to fill the template with
+	err = tpl.Execute(w, data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 }
 
 // method of the app struct, used to insert data into the db
