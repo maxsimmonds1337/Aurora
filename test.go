@@ -49,56 +49,36 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 	data := Data{Name: "Aurora", Age: 0}
 
 	tpl, err := template.New("test").Parse(`
-				<html>
-					<head>
-						<title>{{.Name}}'s profile</title>
-						<a href="./index.html">Go back to the submissions</a>
-					</head>
-					<body>
-						<h1>{{.Name}} is...</h1>
-						<p>Age: {{.Age}} years old!</p>
 
-						<div id = "table_data">
-							<table>
+	<table class="table table-striped table-sm">
 
-								<thead>
-								<tr>
-								<th>Log ID</th>
-								<th>Baby ID</th>
-								<th>Time</th>
-								<th>Activities</th>
-								<th>colour</th>
-								<th>Breast Milk Time</th>
-								<th>Bresat Milk mls</th>
-								<th>Formula Milk mls</th>
-								</tr>
-								</thead>
-								<tbody>
-								{{range $index, $row := .Rows}}
-                                    <tr>
-										<td class ="centered">{{$row.LogId}}</td>
-                                        <td class ="centered">{{$row.BabyID}}</td>
-                                        <td class ="centered">{{$row.Time}}</td>
-                                        <td class ="centered">{{$row.Activities}}</td>
-                                        <td class ="centered">{{$row.Color}}</td>
-                                        <td class ="centered">{{$row.BreastMilkTime}}</td>
-                                        <td class ="centered">{{$row.BreastMilkMls}}</td>
-                                        <td class ="centered">{{$row.FormulaMilkMls}}</td>
-                                    </tr>
-                                {{end}}
-								</tbody>
-							</table>
-						</div>
-					</body>
-					<style>
-						table, th, td {
-							border: 1px solid black;
-						}
-						.centered {
-							text-align: center;
-						}
-					</style>
-				</html>
+		<thead>
+		<tr>
+		<th scope="col">Log ID</th>
+		<th scope="col">Baby ID</th>
+		<th scope="col">Time</th>
+		<th scope="col">Activities</th>
+		<th scope="col">colour</th>
+		<th scope="col">Breast Milk Time</th>
+		<th scope="col">Bresat Milk mls</th>
+		<th scope="col">Formula Milk mls</th>
+		</tr>
+		</thead>
+		<tbody>
+		{{range $index, $row := .Rows}}
+			<tr>
+				<td class ="centered">{{$row.LogId}}</td>
+				<td class ="centered">{{$row.BabyID}}</td>
+				<td class ="centered">{{$row.Time}}</td>
+				<td class ="centered">{{$row.Activities}}</td>
+				<td class ="centered">{{$row.Color}}</td>
+				<td class ="centered">{{$row.BreastMilkTime}}</td>
+				<td class ="centered">{{$row.BreastMilkMls}}</td>
+				<td class ="centered">{{$row.FormulaMilkMls}}</td>
+			</tr>
+		{{end}}
+		</tbody>
+	</table>
 			`)
 
 	if err != nil {
