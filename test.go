@@ -54,11 +54,9 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 
 		<thead>
 		<tr>
-		<th scope="col">Log ID</th>
-		<th scope="col">Baby ID</th>
 		<th scope="col">Time</th>
 		<th scope="col">Activities</th>
-		<th scope="col">colour</th>
+		<th scope="col">Colour</th>
 		<th scope="col">Breast Milk Time</th>
 		<th scope="col">Bresat Milk mls</th>
 		<th scope="col">Formula Milk mls</th>
@@ -67,8 +65,6 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 		<tbody>
 		{{range $index, $row := .Rows}}
 			<tr>
-				<td class ="centered">{{$row.LogId}}</td>
-				<td class ="centered">{{$row.BabyID}}</td>
 				<td class ="centered">{{$row.Time}}</td>
 				<td class ="centered">{{$row.Activities}}</td>
 				<td class ="centered">{{$row.Color}}</td>
@@ -86,7 +82,7 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	rows, err := app.DB.Query("SELECT * FROM baby_logs;")
+	rows, err := app.DB.Query("SELECT * FROM baby_logs ORDER BY log_id DESC;")
 	if err != nil {
 		log.Fatal(err)
 	}
