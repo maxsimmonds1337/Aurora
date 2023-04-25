@@ -186,6 +186,7 @@ func (app *App) chartdata(w http.ResponseWriter, req *http.Request) {
 
 		type Dataset struct {
 			Data                 []float32 `json:"data"` // maybe remove these tags, as they might not be needed
+			Label                string    `json:"label"`
 			LineTension          int       `json:"lineTension"`
 			BackgroundColor      string    `json:"backgroundColor"`
 			BorderColor          string    `json:"borderColor"`
@@ -205,6 +206,7 @@ func (app *App) chartdata(w http.ResponseWriter, req *http.Request) {
 			Datasets: []Dataset{
 				Dataset{
 					Data:                 BreastMilkTimes,
+					Label:                string("Breast Milk (mins)"),
 					LineTension:          int(0),
 					BackgroundColor:      string("transparent"),
 					BorderColor:          string("#ff0000"),
@@ -213,6 +215,7 @@ func (app *App) chartdata(w http.ResponseWriter, req *http.Request) {
 				},
 				Dataset{
 					Data:                 BreastMilkMlss,
+					Label:                string("Breast Milk Expressed (mls)"),
 					LineTension:          int(0),
 					BackgroundColor:      string("transparent"),
 					BorderColor:          string("#00ff00"),
@@ -221,6 +224,7 @@ func (app *App) chartdata(w http.ResponseWriter, req *http.Request) {
 				},
 				Dataset{
 					Data:                 FormulaMilkMlss,
+					Label:                string("Formula Milk (mls)"),
 					LineTension:          int(0),
 					BackgroundColor:      string("transparent"),
 					BorderColor:          string("#0000ff"),

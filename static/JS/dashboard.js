@@ -23,7 +23,7 @@
         options: {
           plugins: {
             legend: {
-              display: false
+              display: true,
             },
             tooltip: {
               boxPadding: 3
