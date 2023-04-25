@@ -133,6 +133,119 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 
 }
 
+// this function returns data to the chart for the dash board.
+func (app *App) chartdata(w http.ResponseWriter, req *http.Request) {
+
+	// read the body of the request
+	body, err := io.ReadAll(req.Body)
+	if err != nil {
+		// if we hit an error, return this TODO: this should be a json string to handle it correctly on the frontend
+		http.Error(w, "Error reading request body", http.StatusInternalServerError)
+		return
+	}
+	//upon exiting the function, close the body request
+	defer req.Body.Close()
+
+	// this will check to see what code we get, 7d = 7 days worth of data, etc.
+	if string(body) == "7d" {
+		// 7 days, so we get 7 days worth of averages
+
+		// need to see how to handle this, it;s now a 2d array returned, so need to get the data out before charting
+
+		rows, err := app.DB.Query("SELECT DAYNAME(time), sum(breast_milk_time) as total_breast_milk_time, sum(breast_milk_mls) as total_breast_milk_mls, sum(formula_milk_mls) as total_formula_milk_mls FROM baby_logs WHERE time > DATE_SUB(NOW(), INTERVAL 6 DAY) GROUP BY DAYNAME(time), DATE(time) ORDER BY DATE(time) ASC;")
+		if err != nil {
+			http.Error(w, "error executing sql2", http.StatusInternalServerError)
+			return
+		}
+		defer rows.Close()
+
+		var (
+			Day            string
+			BreastMilkTime float32
+			BreastMilkMls  float32
+			FormulaMilkMls float32
+
+			Days            []string
+			BreastMilkTimes []float32
+			BreastMilkMlss  []float32
+			FormulaMilkMlss []float32
+		)
+
+		for rows.Next() {
+
+			// scan the row into the ars
+			rows.Scan(&Day, &BreastMilkTime, &BreastMilkMls, &FormulaMilkMls)
+
+			// add them to the slices
+			Days = append(Days, Day)
+			BreastMilkTimes = append(BreastMilkTimes, BreastMilkTime)
+			FormulaMilkMlss = append(FormulaMilkMlss, FormulaMilkMls)
+			BreastMilkMlss = append(BreastMilkMlss, BreastMilkMls)
+
+		}
+
+		type Dataset struct {
+			Data                 []float32 `json:"data"` // maybe remove these tags, as they might not be needed
+			LineTension          int       `json:"lineTension"`
+			BackgroundColor      string    `json:"backgroundColor"`
+			BorderColor          string    `json:"borderColor"`
+			BorderWidth          int       `json:"borderWidth"`
+			PointBackgroundColor string    `json:"pointBackgroundColor"`
+		}
+
+		type ChartData struct {
+			Labels   []string  `json:"labels"`
+			Datasets []Dataset `json:"datasets"`
+		}
+
+		// hard code something in the struct and return it for a test
+
+		chartData := ChartData{
+			Labels: Days,
+			Datasets: []Dataset{
+				Dataset{
+					Data:                 BreastMilkTimes,
+					LineTension:          int(0),
+					BackgroundColor:      string("transparent"),
+					BorderColor:          string("#ff0000"),
+					BorderWidth:          int(4),
+					PointBackgroundColor: string("#ff0000"),
+				},
+				Dataset{
+					Data:                 BreastMilkMlss,
+					LineTension:          int(0),
+					BackgroundColor:      string("transparent"),
+					BorderColor:          string("#00ff00"),
+					BorderWidth:          int(4),
+					PointBackgroundColor: string("#00ff00"),
+				},
+				Dataset{
+					Data:                 FormulaMilkMlss,
+					LineTension:          int(0),
+					BackgroundColor:      string("transparent"),
+					BorderColor:          string("#0000ff"),
+					BorderWidth:          int(4),
+					PointBackgroundColor: string("#0000ff"),
+				},
+			},
+		}
+
+		if err := json.NewEncoder(w).Encode(chartData); err != nil { // here, we make a json encoder that will write to the response writer, and encode the data back into json
+			http.Error(w, "Error encoding response", http.StatusInternalServerError)
+			return
+		}
+
+		// for i, row := range dataRows {
+		// 	fmt.Printf("Row %d:\n", i+1)
+		// 	for key, value := range row {
+		// 		fmt.Printf("\t%s: %v\n", key, value)
+		// 	}
+		// }
+
+	}
+
+}
+
 // method of the app struct, used to insert data into the db
 func (app *App) insert_data(body_json []byte) {
 
@@ -218,6 +331,7 @@ func main() {
 	fmt.Println("Successfully connected to the database!")
 
 	http.HandleFunc("/get_post_content", app.get_post_content)
+	http.HandleFunc("/chartdata", app.chartdata)
 	http.HandleFunc("/data", app.data)
 
 	// Set up a file server to serve static files from the "static" directory

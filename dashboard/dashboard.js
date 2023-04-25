@@ -20,23 +20,41 @@
         'Friday',
         'Saturday'
       ],
-      datasets: [{
-        data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          23489,
-          24092,
-          12034
-        ],
-        lineTension: 0,
-        backgroundColor: 'transparent',
-        borderColor: '#007bff',
-        borderWidth: 4,
-        pointBackgroundColor: '#007bff'
-      }]
-    },
+      datasets: [
+        {
+          data: [
+            15339,
+            21345,
+            18483,
+            24003,
+            23489,
+            24092,
+            12034
+          ],
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#007bff',
+          borderWidth: 4,
+          pointBackgroundColor: '#007bff'
+        },
+        {
+          data: [
+            10000,
+            12000,
+            14000,
+            16000,
+            18000,
+            20000,
+            22000
+          ],
+          lineTension: 0,
+          backgroundColor: 'transparent',
+          borderColor: '#ff0000',
+          borderWidth: 4,
+          pointBackgroundColor: '#ff0000'
+        }
+      ]
+    },      
     options: {
       plugins: {
         legend: {
