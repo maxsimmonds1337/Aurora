@@ -209,9 +209,9 @@ func (app *App) chartdata(w http.ResponseWriter, req *http.Request) {
 					Label:                string("Breast Milk (mins)"),
 					LineTension:          int(0),
 					BackgroundColor:      string("transparent"),
-					BorderColor:          string("#ff0000"),
+					BorderColor:          string("#0000ff"),
 					BorderWidth:          int(4),
-					PointBackgroundColor: string("#ff0000"),
+					PointBackgroundColor: string("#0000ff"),
 				},
 				Dataset{
 					Data:                 BreastMilkMlss,
@@ -227,9 +227,9 @@ func (app *App) chartdata(w http.ResponseWriter, req *http.Request) {
 					Label:                string("Formula Milk (mls)"),
 					LineTension:          int(0),
 					BackgroundColor:      string("transparent"),
-					BorderColor:          string("#0000ff"),
+					BorderColor:          string("#ff0000"),
 					BorderWidth:          int(4),
-					PointBackgroundColor: string("#0000ff"),
+					PointBackgroundColor: string("#ff	0000"),
 				},
 			},
 		}

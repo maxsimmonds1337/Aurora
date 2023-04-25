@@ -3,107 +3,119 @@
 
 <head>
     <script src="/JS/color-modes.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
-  
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
         }
-      }
 
-      .b-example-divider {
-        width: 100%;
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
 
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
+        .b-example-divider {
+            width: 100%;
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
 
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
 
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
 
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
 
-      .btn-bd-primary {
-        --bd-violet-bg: #712cf9;
-        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
 
-        --bs-btn-font-weight: 600;
-        --bs-btn-color: var(--bs-white);
-        --bs-btn-bg: var(--bd-violet-bg);
-        --bs-btn-border-color: var(--bd-violet-bg);
-        --bs-btn-hover-color: var(--bs-white);
-        --bs-btn-hover-bg: #6528e0;
-        --bs-btn-hover-border-color: #6528e0;
-        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-        --bs-btn-active-color: var(--bs-btn-hover-color);
-        --bs-btn-active-bg: #5a23c8;
-        --bs-btn-active-border-color: #5a23c8;
-      }
-      .bd-mode-toggle {
-        z-index: 1500;
-      }
+        .btn-bd-primary {
+            --bd-violet-bg: #712cf9;
+            --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+            --bs-btn-font-weight: 600;
+            --bs-btn-color: var(--bs-white);
+            --bs-btn-bg: var(--bd-violet-bg);
+            --bs-btn-border-color: var(--bd-violet-bg);
+            --bs-btn-hover-color: var(--bs-white);
+            --bs-btn-hover-bg: #6528e0;
+            --bs-btn-hover-border-color: #6528e0;
+            --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+            --bs-btn-active-color: var(--bs-btn-hover-color);
+            --bs-btn-active-bg: #5a23c8;
+            --bs-btn-active-border-color: #5a23c8;
+        }
+
+        .bd-mode-toggle {
+            z-index: 1500;
+        }
     </style>
 
-    
+
     <!-- Custom styles for this template -->
     <link href="./CSS/dashboard.css" rel="stylesheet">
-  </head>
-  <body>
+</head>
+
+<body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-      <symbol id="check2" viewBox="0 0 16 16">
-        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-      </symbol>
-      <symbol id="circle-half" viewBox="0 0 16 16">
-        <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
-      </symbol>
-      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-        <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
-        <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
-      </symbol>
-      <symbol id="sun-fill" viewBox="0 0 16 16">
-        <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
-      </symbol>
+        <symbol id="check2" viewBox="0 0 16 16">
+            <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+        </symbol>
+        <symbol id="circle-half" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+        </symbol>
+        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+            <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+            <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
+        </symbol>
+        <symbol id="sun-fill" viewBox="0 0 16 16">
+            <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
+        </symbol>
     </svg>
-    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABvElEQVQ4T62TPUsDQRCFv+sBWrbdVVEsEzGwxHJJI0UIjgCIuV7IoQnAKiuKilIVCEGQhDCm1dZaKjA0NbduYaMzy7fduYdNLPM/vP/5znXdzMGi5gu9U5LhQ2BxEIx5n6nq6iCKAiwjk2eSQAECJBU0Wgq3Pv9K4z4Bo4VKpUGWmm+8KvR4CR7LxeLTkxuV7X8B51mbpV7sTzOXoT2fkKjgvgbh0gVJ+f+NNuOfls8X51tZMkVHmTWTaezgBjTXd+uN7FzSrl1AlD+G3qvmvrboj4c4o4NkLYlW8+RwPiYrhu+M0j6B5U5hDvPJFIB2/cutb1jK0W3qyP6oHPCGjpf03x31Jcn9Ov1+eTX1+zHl/YaRu7zyLxOMs7s1srtfT+w7V3qNd9Pj7z+8PPp/Hms6wbZOJ6hfuU6SjU6SjQ6StU4nw9G4+4cYzAGrg2OEP1/EDx5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5v/u8iGRy0RbsPAAAAABJRU5ErkJggg==" type="image/png">
+    <link rel="shortcut icon"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABvElEQVQ4T62TPUsDQRCFv+sBWrbdVVEsEzGwxHJJI0UIjgCIuV7IoQnAKiuKilIVCEGQhDCm1dZaKjA0NbduYaMzy7fduYdNLPM/vP/5znXdzMGi5gu9U5LhQ2BxEIx5n6nq6iCKAiwjk2eSQAECJBU0Wgq3Pv9K4z4Bo4VKpUGWmm+8KvR4CR7LxeLTkxuV7X8B51mbpV7sTzOXoT2fkKjgvgbh0gVJ+f+NNuOfls8X51tZMkVHmTWTaezgBjTXd+uN7FzSrl1AlD+G3qvmvrboj4c4o4NkLYlW8+RwPiYrhu+M0j6B5U5hDvPJFIB2/cutb1jK0W3qyP6oHPCGjpf03x31Jcn9Ov1+eTX1+zHl/YaRu7zyLxOMs7s1srtfT+w7V3qNd9Pj7z+8PPp/Hms6wbZOJ6hfuU6SjU6SjQ6StU4nw9G4+4cYzAGrg2OEP1/EDx5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5v/u8iGRy0RbsPAAAAABJRU5ErkJggg=="
+        type="image/png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -121,12 +133,13 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script> -->
 
-    <a href="https://www.redcross.org.uk/first-aid/learn-first-aid-for-babies-and-children/choking-baby">Baby CPR</a> || 
+    <a href="https://www.redcross.org.uk/first-aid/learn-first-aid-for-babies-and-children/choking-baby">Baby CPR</a> ||
     <a href="tel:+111">Click to call 111 (Non Emergency line)</a> ||
-    <a href="tel:+999">Click to call 999 (Emergency line) for things like choking</a> || 
+    <a href="tel:+999">Click to call 999 (Emergency line) for things like choking</a> ||
     <a href="./dashboard.html">See the data!</a> <br>
 
     <script>
+
 
         let cal_open = false;
 
@@ -151,7 +164,7 @@
 
             var data;
 
-            const breast_milk_time = parseInt(document.getElementById('breast_milk_mins').value);
+            const breast_milk_time = parseInt(document.getElementById('breast_milk_mins').value) + getTimerTime();
             const breast_milk_mls = parseInt(document.getElementById('breast_milk_mls').value);
             const formula_milk_mls = parseInt(document.getElementById('formula_milk_mls').value);
             const send_colour = document.getElementById("send_colour").checked;
@@ -189,175 +202,301 @@
 
         }
     </script>
-</head>
+    </head>
 
-<body>
+    <body>
 
-    <label class="switch">
-        <input type="checkbox" id="lang_button">
-        <div class="slider round"></div>
-    </label>
+        <label class="switch">
+            <input type="checkbox" id="lang_button">
+            <div class="slider round"></div>
+        </label>
 
-    <form method="post" onsubmit="SendData()">
-        <div id="Outputs">
+        <form method="post" onsubmit="SendData()">
+            <div id="Outputs">
 
-            <h2 translation="en">
-                Outputs:
-            </h2>
+                <h2 translation="en">
+                    Outputs:
+                </h2>
 
-            <label>
-                <input type="checkbox" name="event" value="pooped">
-                <label translation="en">Poo</label>
-            </label>
-
-            <label>
-                <input type="checkbox" name="event" value="peed">
-                <label translation="en">Wee</label>
-            </label>
-
-            <label>
-                <input type="checkbox" name="event" value="had_blood">
-                <label translation="en">Blood</label>
-            </label>
-
-            <label>
-                <input type="checkbox" name="event" value="vomited">
-                <label translation="en">Vomit</label>
-            </label>
-            <br>
-            <label>
-                <label translation="en">Colour</label>
-                <input type="color" id="colour_box" value="#000000">
-            </label>
-            <br>
-            <label>
-                <label translation="en">Send Colour?</label><input type="checkbox" id="send_colour" value="send_colour">
-            </label>
-            <br>
-            <label>
-                <label translation="en">
-                    Choose a date and time?
-                </label>
-            </label>
-            <input type="text" id="date" name="date" onclick="cal_open=true">
-        </div>
-
-        <div id="inputs">
-            <h2 translation="en">
-                Inputs:
-            </h2>
-
-            <p>
                 <label>
-                    <label translation="en">Breast Milk :</label> <input type="number" id="breast_milk_mins" value="">
-                    <label translation="en">minutes</label>
+                    <input type="checkbox" name="event" value="pooped">
+                    <label translation="en">Poo</label>
+                </label>
+
+                <label>
+                    <input type="checkbox" name="event" value="peed">
+                    <label translation="en">Wee</label>
+                </label>
+
+                <label>
+                    <input type="checkbox" name="event" value="had_blood">
+                    <label translation="en">Blood</label>
+                </label>
+
+                <label>
+                    <input type="checkbox" name="event" value="vomited">
+                    <label translation="en">Vomit</label>
                 </label>
                 <br>
                 <label>
-                    <label translation="en">Breast Milk (expressed) :</label> <input type="number" id="breast_milk_mls"
-                        value="">
-                    <label translation="en">ml</label>
+                    <label translation="en">Colour</label>
+                    <input type="color" id="colour_box" value="#000000">
                 </label>
                 <br>
                 <label>
-                    <label translation="en">Formula Milk :</label><input type="number" id="formula_milk_mls" value="">
-                    <label translation="en">ml</label>
+                    <label translation="en">Send Colour?</label><input type="checkbox" id="send_colour"
+                        value="send_colour">
                 </label>
+                <br>
+                <label>
+                    <label translation="en">
+                        Choose a date and time?
+                    </label>
+                </label>
+                <input type="text" id="date" name="date" onclick="cal_open=true">
+            </div>
 
-            </p>
-        </div>
+            <div id="inputs">
+                <h2 translation="en">
+                    Inputs:
+                </h2>
 
-        <input type="submit" value="Submit">
+                <p>
+                    <label>
+                        <label translation="en">Breast Milk :</label> <input type="number" id="breast_milk_mins"
+                            value="">
+                        <label translation="en">minutes</label>
+                    </label>
+                    <br>
+                    <label>
+                        <label translation="en">Breast Milk (expressed) :</label> <input type="number"
+                            id="breast_milk_mls" value="">
+                        <label translation="en">ml</label>
+                    </label>
+                    <br>
+                    <label>
+                        <label translation="en">Formula Milk :</label><input type="number" id="formula_milk_mls"
+                            value="">
+                        <label translation="en">ml</label>
+                    </label>
 
-    </form>
+                </p>
 
-</body>
+                <div id="left-boob">
+                    <h4>Left</h4>
+                    <div id="left-boob-timer">0:00:00</div>
 
-<script>
+                    <button id="startButtonLeft" enabled onclick="startStopwatch('left')">Start</button>
+                    <button id="stopButtonLeft" disabled onclick="stopStopwatch('left')">Stop</button>
+                    <button id="resetButtonLeft" enabled onclick="resetStopwatch('left')">Reset</button>
 
-    let intervalId;
-    let userChanged = false;
+                </div>
 
-    const translations = {
+                <div id="right-boob">
+                    <h4>Right</h4>
+                    <div id="right-boob-timer">0:00:00</div>
+
+                    <button id="startButtonRight" enabled onclick="startStopwatch('right')">Start</button>
+                    <button id="stopButtonRight" disabled onclick="stopStopwatch('right')">Stop</button>
+                    <button id="resetButtonRight" enabled onclick="resetStopwatch('right')">Reset</button>
+
+                </div>
+
+                <script>
+                    //left 
+                    var startTimeLeft = 0;
+                    var elapsedTimeLeft = 0;
+                    var timerIntervalLeft = null;
+                    var timerDisplayLeft = document.getElementById("left-boob-timer");
+                    var startButtonLeft = document.getElementById("startButtonLeft");
+                    var stopButtonLeft = document.getElementById("stopButtonLeft");
+                    var resetButtonLeft = document.getElementById("resetButtonLeft");
+
+                    // right
+                    var startTimeRight = 0;
+                    var elapsedTimeRight = 0;
+                    var timerIntervalRight = null;
+                    var timerDisplayRight = document.getElementById("right-boob-timer");
+                    var startButtonRight = document.getElementById("startButtonRight");
+                    var stopButtonRight = document.getElementById("stopButtonRight");
+                    var resetButtonRight = document.getElementById("resetButtonRight");
+
+                    function startStopwatch(side) {
+
+                        if (side == "left") {
+                            startTimeLeft = Date.now() - elapsedTimeLeft;
+                            timerIntervalLeft = setInterval(function () {
+                                updateStopwatch("left");
+                            }, 10);
+                            startButtonLeft.disabled = true;
+                            stopButtonLeft.disabled = false;
+                        } else {
+                            startTimeRight = Date.now() - elapsedTimeRight;
+                            timerIntervalRight = setInterval(function () {
+                                updateStopwatch("right");
+                            }, 10);
+                            startButtonRight.disabled = true;
+                            stopButtonRight.disabled = false;
+                        }
+
+                    }
+
+                    function stopStopwatch(side) {
+                        if (side == "left") {
+                            clearInterval(timerIntervalLeft);
+                            elapsedTimeLeft = Date.now() - startTimeLeft;
+                            startButtonLeft.disabled = false;
+                            stopButtonLeft.disabled = true;
+                        } else {
+                            clearInterval(timerIntervalRight);
+                            elapsedTimeRight = Date.now() - startTimeRight;
+                            startButtonRight.disabled = false;
+                            stopButtonRight.disabled = true;
+                        }
+                    }
+
+                    function resetStopwatch(side) {
+                        if (side == "left") {
+                            clearInterval(timerIntervalLeft);
+                            elapsedTimeLeft = 0;
+                            updateStopwatch("left");
+                            startButtonLeft.disabled = false;
+                            stopButtonLeft.disabled = true;
+                        } else {
+                            clearInterval(timerIntervalRight);
+                            elapsedTimeRight = 0;
+                            updateStopwatch("right");
+                            startButtonRight.disabled = false;
+                            stopButtonRight.disabled = true;
+                        }
+                    }
+
+                    function updateStopwatch(side) {
+                        if (side == "left") {
+                            console.log("updating left stop watch time - " + elapsedTimeLeft)
+                            elapsedTimeLeft = elapsedTimeLeft + 10; // not sure if this is the best way
+                            var milliseconds = elapsedTimeLeft % 1000;
+                            var seconds = Math.floor(elapsedTimeLeft / 1000) % 60;
+                            var minutes = Math.floor(elapsedTimeLeft / 60000) % 60;
+                            var hours = Math.floor(elapsedTimeLeft / 3600000);
+
+                            var timerTextLeft = hours.toString().padStart(2, "0") + ":" +
+                                minutes.toString().padStart(2, "0") + ":" +
+                                seconds.toString().padStart(2, "0") + "." +
+                                milliseconds.toString().padStart(3, "0");
+
+                            timerDisplayLeft.textContent = timerTextLeft;
+                        } else {
+                            elapsedTimeRight = elapsedTimeRight + 10; // not sure if this is the best way
+                            var milliseconds = elapsedTimeRight % 1000;
+                            var seconds = Math.floor(elapsedTimeRight / 1000) % 60;
+                            var minutes = Math.floor(elapsedTimeRight / 60000) % 60;
+                            var hours = Math.floor(elapsedTimeRight / 3600000);
+
+                            var timerTextRight = hours.toString().padStart(2, "0") + ":" +
+                                minutes.toString().padStart(2, "0") + ":" +
+                                seconds.toString().padStart(2, "0") + "." +
+                                milliseconds.toString().padStart(3, "0");
+
+                            timerDisplayRight.textContent = timerTextRight;
+                        }
+                    }
+                </script>
+
+            </div>
+            </div>
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+    </body>
+
+    <script>
+
+        let intervalId;
+        let userChanged = false;
+
+        const translations = {
 
 
-        "en": {
-            "Выходные данные:": "Outputs:",
-            "Какашки": "Poo",
-            "Моча": "Wee",
-            "Кровь": "Blood",
-            "Рвота": "Vomit",
-            "Цвет:": "Colour",
-            "Отправить цвет?": "Send Colour?",
-            "Выберите дату и время": "Choose a date and time?",
-            "Входные данные:": "Inputs:",
-            "Грудное молоко:": "Breast Milk :",
-            "Грудное молоко (выраженное):": "Breast Milk (expressed) :",
-            "Формула молока:": "Formula Milk :",
-            "минут": "minutes",
-            "мл": "ml",
-            "Отправить": "Submit"
-        },
-        "ru": {
-            "Outputs:": "Выходные данные:",
-            "Poo": "Какашки",
-            "Wee": "Моча",
-            "Blood": "Кровь",
-            "Vomit": "Рвота",
-            "Colour": "Цвет:",
-            "Send Colour?": "Отправить цвет?",
-            "Choose a date and time?": "Выберите дату и время",
-            "Inputs:": "Входные данные:",
-            "Breast Milk :": "Грудное молоко:",
-            "Breast Milk (expressed) :": "Грудное молоко (выраженное):",
-            "Formula Milk :": "Формула молока:",
-            "minutes": "минут",
-            "ml": "мл",
-            "Submit": "Отправить"
-        }
-    }
-
-    let slider = document.getElementById("lang_button");
-
-    slider.addEventListener("change", function (event) {
-        const lang = event.target.checked ? "ru" : "en";
-        console.log(lang)
-        const elements = document.querySelectorAll("[translation]")
-        elements.forEach(function (element) {
-            console.log(element)
-            const key = element.innerHTML.trim();
-            const text = translations[lang][key];
-            console.log("key " + key + " text " + text);
-            element.innerHTML = text;
-        });
-    });
-
-    const fp = flatpickr("#date", {
-        disableMobile: "true",
-        enableTime: true,
-        dateFormat: "Y-m-d H:i:s",
-        defaultDate: new Date(),
-        onOpen: function (selectedDates, dateStr, instance) {
-            clearInterval(intervalId);
-        },
-        onClose: function (selectedDates, dateStr, instance) {
-            if (!userChanged) {
-                intervalId = setInterval(function () {
-                    instance.setDate(new Date(), false);
-                }, 1000);
+            "en": {
+                "Выходные данные:": "Outputs:",
+                "Какашки": "Poo",
+                "Моча": "Wee",
+                "Кровь": "Blood",
+                "Рвота": "Vomit",
+                "Цвет:": "Colour",
+                "Отправить цвет?": "Send Colour?",
+                "Выберите дату и время": "Choose a date and time?",
+                "Входные данные:": "Inputs:",
+                "Грудное молоко:": "Breast Milk :",
+                "Грудное молоко (выраженное):": "Breast Milk (expressed) :",
+                "Формула молока:": "Formula Milk :",
+                "минут": "minutes",
+                "мл": "ml",
+                "Отправить": "Submit"
+            },
+            "ru": {
+                "Outputs:": "Выходные данные:",
+                "Poo": "Какашки",
+                "Wee": "Моча",
+                "Blood": "Кровь",
+                "Vomit": "Рвота",
+                "Colour": "Цвет:",
+                "Send Colour?": "Отправить цвет?",
+                "Choose a date and time?": "Выберите дату и время",
+                "Inputs:": "Входные данные:",
+                "Breast Milk :": "Грудное молоко:",
+                "Breast Milk (expressed) :": "Грудное молоко (выраженное):",
+                "Formula Milk :": "Формула молока:",
+                "minutes": "минут",
+                "ml": "мл",
+                "Submit": "Отправить"
             }
-            userChanged = false;
-        },
-        onChange: function (selectedDates, dateStr, instance) {
-            userChanged = true;
         }
-    });
 
-    intervalId = setInterval(function () {
-        fp.setDate(new Date(), false);
-    }, 1000);
+        let slider = document.getElementById("lang_button");
+
+        slider.addEventListener("change", function (event) {
+            const lang = event.target.checked ? "ru" : "en";
+            console.log(lang)
+            const elements = document.querySelectorAll("[translation]")
+            elements.forEach(function (element) {
+                console.log(element)
+                const key = element.innerHTML.trim();
+                const text = translations[lang][key];
+                console.log("key " + key + " text " + text);
+                element.innerHTML = text;
+            });
+        });
+
+        const fp = flatpickr("#date", {
+            disableMobile: "true",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i:s",
+            defaultDate: new Date(),
+            onOpen: function (selectedDates, dateStr, instance) {
+                clearInterval(intervalId);
+            },
+            onClose: function (selectedDates, dateStr, instance) {
+                if (!userChanged) {
+                    intervalId = setInterval(function () {
+                        instance.setDate(new Date(), false);
+                    }, 1000);
+                }
+                userChanged = false;
+            },
+            onChange: function (selectedDates, dateStr, instance) {
+                userChanged = true;
+            }
+        });
+
+        intervalId = setInterval(function () {
+            fp.setDate(new Date(), false);
+        }, 1000);
 
 
-</script>
+    </script>
 
 </html>
