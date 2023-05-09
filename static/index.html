@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en" data-bs-theme="dark">
 
 <head>
-    <script src="/JS/color-modes.js"></script>
+    <script src="./JS/color-modes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
@@ -94,25 +96,6 @@
 </head>
 
 <body>
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check2" viewBox="0 0 16 16">
-            <path
-                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-        </symbol>
-        <symbol id="circle-half" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
-        </symbol>
-        <symbol id="moon-stars-fill" viewBox="0 0 16 16">
-            <path
-                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
-            <path
-                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z" />
-        </symbol>
-        <symbol id="sun-fill" viewBox="0 0 16 16">
-            <path
-                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z" />
-        </symbol>
-    </svg>
     <link rel="shortcut icon"
         href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABvElEQVQ4T62TPUsDQRCFv+sBWrbdVVEsEzGwxHJJI0UIjgCIuV7IoQnAKiuKilIVCEGQhDCm1dZaKjA0NbduYaMzy7fduYdNLPM/vP/5znXdzMGi5gu9U5LhQ2BxEIx5n6nq6iCKAiwjk2eSQAECJBU0Wgq3Pv9K4z4Bo4VKpUGWmm+8KvR4CR7LxeLTkxuV7X8B51mbpV7sTzOXoT2fkKjgvgbh0gVJ+f+NNuOfls8X51tZMkVHmTWTaezgBjTXd+uN7FzSrl1AlD+G3qvmvrboj4c4o4NkLYlW8+RwPiYrhu+M0j6B5U5hDvPJFIB2/cutb1jK0W3qyP6oHPCGjpf03x31Jcn9Ov1+eTX1+zHl/YaRu7zyLxOMs7s1srtfT+w7V3qNd9Pj7z+8PPp/Hms6wbZOJ6hfuU6SjU6SjQ6StU4nw9G4+4cYzAGrg2OEP1/EDx5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5r5v/u8iGRy0RbsPAAAAABJRU5ErkJggg=="
         type="image/png">
@@ -128,10 +111,6 @@
     <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.sound.min.js"></script> -->
 
     <a href="https://www.redcross.org.uk/first-aid/learn-first-aid-for-babies-and-children/choking-baby">Baby CPR</a> ||
     <a href="tel:+111">Click to call 111 (Non Emergency line)</a> ||
@@ -163,8 +142,20 @@
             });
 
             var data;
+            var times = getTimerTime(); // get the various timer values, in minutes, as an array (left-boob, right-boob, left-pump, right-pump)
+        
+            console.log("got these times: " + times)
 
-            const breast_milk_time = parseInt(document.getElementById('breast_milk_mins').value) + getTimerTime();
+            const feed_left_time = parseFloat(times[0]); 
+            const feed_right_time = parseFloat(times[1]); 
+            
+            const breast_milk_time = parseFloat(document.getElementById('breast_milk_mins').value) + feed_left_time + feed_right_time;
+
+            console.log(breast_milk_time)
+
+            const pump_left_time = times[2];
+            const pump_right_time = times[3]; 
+
             const breast_milk_mls = parseInt(document.getElementById('breast_milk_mls').value);
             const formula_milk_mls = parseInt(document.getElementById('formula_milk_mls').value);
             const send_colour = document.getElementById("send_colour").checked;
@@ -172,12 +163,20 @@
             const send_activites = checkedValues.length;
             const time_stamp = document.getElementById("date").value;
 
+            console.log("breast milk time - " + breast_milk_time)
+            console.log("pump left time - " + pump_left_time)
+
+
             data = {
                 ...data,
                 "baby_id": 1,
                 "activities": send_activites ? checkedValues : undefined,
                 "colour": send_colour ? colour : undefined,
-                "breast_milk_time": breast_milk_time ? breast_milk_time : 0,
+                "breast_milk_time": breast_milk_time ? breast_milk_time : 0.0,
+                "left_pump_time": pump_left_time ? pump_left_time : 0.0,
+                "right_pump_time": pump_right_time ? pump_right_time : 0.0,
+                "left_milk_time": feed_left_time ? feed_left_time : 0.0,
+                "right_milk_time": feed_right_time ? feed_right_time : 0.0,
                 "breast_milk_mls": breast_milk_mls ? breast_milk_mls : 0,
                 "formula_milk_mls": formula_milk_mls ? formula_milk_mls : 0,
                 "time": time_stamp,
@@ -192,9 +191,18 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Success');
-                    location.reload();
+                    Swal.fire({
+                        title: "Success!",
+                        text: "Submitted!",
+                        icon: "success",
+                        timer: 1500,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    })
+                        .then(function () {
+                            location.reload();
 
+                        })
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -264,7 +272,7 @@
                 <p>
                     <label>
                         <label translation="en">Breast Milk :</label> <input type="number" id="breast_milk_mins"
-                            value="">
+                            value="" step="any">
                         <label translation="en">minutes</label>
                     </label>
                     <br>
@@ -283,6 +291,7 @@
                 </p>
 
                 <div id="left-boob">
+
                     <h4>Left</h4>
                     <div id="left-boob-timer">0:00:00</div>
 
@@ -293,6 +302,7 @@
                 </div>
 
                 <div id="right-boob">
+
                     <h4>Right</h4>
                     <div id="right-boob-timer">0:00:00</div>
 
@@ -302,109 +312,242 @@
 
                 </div>
 
-                <script>
-                    //left 
-                    var startTimeLeft = 0;
-                    var elapsedTimeLeft = 0;
-                    var timerIntervalLeft = null;
-                    var timerDisplayLeft = document.getElementById("left-boob-timer");
-                    var startButtonLeft = document.getElementById("startButtonLeft");
-                    var stopButtonLeft = document.getElementById("stopButtonLeft");
-                    var resetButtonLeft = document.getElementById("resetButtonLeft");
+                <div id="left-pump">
 
-                    // right
-                    var startTimeRight = 0;
-                    var elapsedTimeRight = 0;
-                    var timerIntervalRight = null;
-                    var timerDisplayRight = document.getElementById("right-boob-timer");
-                    var startButtonRight = document.getElementById("startButtonRight");
-                    var stopButtonRight = document.getElementById("stopButtonRight");
-                    var resetButtonRight = document.getElementById("resetButtonRight");
+                    <h4>Left Pump</h4>
+                    <div id="left-pump-timer">0:00:00</div>
 
-                    function startStopwatch(side) {
+                    <button id="startButtonLeftPump" enabled onclick="startStopwatch('left-pump')">Start</button>
+                    <button id="stopButtonLeftPump" disabled onclick="stopStopwatch('left-pump')">Stop</button>
+                    <button id="resetButtonLeftPump" enabled onclick="resetStopwatch('left-pump')">Reset</button>
 
-                        if (side == "left") {
-                            startTimeLeft = Date.now() - elapsedTimeLeft;
-                            timerIntervalLeft = setInterval(function () {
-                                updateStopwatch("left");
-                            }, 10);
-                            startButtonLeft.disabled = true;
-                            stopButtonLeft.disabled = false;
-                        } else {
-                            startTimeRight = Date.now() - elapsedTimeRight;
-                            timerIntervalRight = setInterval(function () {
-                                updateStopwatch("right");
-                            }, 10);
-                            startButtonRight.disabled = true;
-                            stopButtonRight.disabled = false;
-                        }
+                </div>
 
-                    }
+                <div id="right-pump">
 
-                    function stopStopwatch(side) {
-                        if (side == "left") {
-                            clearInterval(timerIntervalLeft);
-                            elapsedTimeLeft = Date.now() - startTimeLeft;
-                            startButtonLeft.disabled = false;
-                            stopButtonLeft.disabled = true;
-                        } else {
-                            clearInterval(timerIntervalRight);
-                            elapsedTimeRight = Date.now() - startTimeRight;
-                            startButtonRight.disabled = false;
-                            stopButtonRight.disabled = true;
-                        }
-                    }
+                    <h4>Right Pump</h4>
+                    <div id="right-pump-timer">0:00:00</div>
 
-                    function resetStopwatch(side) {
-                        if (side == "left") {
-                            clearInterval(timerIntervalLeft);
-                            elapsedTimeLeft = 0;
+                    <button id="startButtonRightPump" enabled onclick="startStopwatch('right-pump')">Start</button>
+                    <button id="stopButtonRightPump" disabled onclick="stopStopwatch('right-pump')">Stop</button>
+                    <button id="resetButtonRightPump" enabled onclick="resetStopwatch('right-pump')">Reset</button>
+
+                </div>
+
+            </div>
+
+            <script>
+                //left boob
+                var startTimeLeft = 0;
+                var elapsedTimeLeft = 0;
+                var timerIntervalLeft = null;
+                var timerDisplayLeft = document.getElementById("left-boob-timer");
+                var startButtonLeft = document.getElementById("startButtonLeft");
+                var stopButtonLeft = document.getElementById("stopButtonLeft");
+                var resetButtonLeft = document.getElementById("resetButtonLeft");
+
+                // right boob
+                var startTimeRight = 0;
+                var elapsedTimeRight = 0;
+                var timerIntervalRight = null;
+                var timerDisplayRight = document.getElementById("right-boob-timer");
+                var startButtonRight = document.getElementById("startButtonRight");
+                var stopButtonRight = document.getElementById("stopButtonRight");
+                var resetButtonRight = document.getElementById("resetButtonRight");
+
+                //left pump
+                var startLeftPump = 0;
+                var elapsedTimeLeftPump = 0;
+                var timerIntervalLeftPump = null;
+                var timerDisplayLeftPump = document.getElementById("left-pump-timer");
+                var startButtonLeftPump = document.getElementById("startButtonLeftPump");
+                var stopButtonLeftPump = document.getElementById("stopButtonLeftPump");
+                var resetButtonLeftPump = document.getElementById("resetButtonLeftPump");
+
+                // right pump
+                var startRightPump = 0;
+                var elapsedTimeRightPump = 0;
+                var timerIntervalRightPump = null;
+                var timerDisplayRightPump = document.getElementById("right-pump-timer");
+                var startButtonRightPump = document.getElementById("startButtonRightPump");
+                var stopButtonRightPump = document.getElementById("stopButtonRightPump");
+                var resetButtonRightPump = document.getElementById("resetButtonRightPump");
+
+                function convertTimeString(time) {
+
+                    //00:00:26.630
+                    parts = time.split(":"); // [00],[00],[26.630] - hours, minutes, secs.milli
+                    minutes = parseFloat(parts[1]);
+                    hours = parseFloat(parts[0]);
+                    subParts = parts[2].split("."); // [26],[630]
+                    seconds = parseFloat(subParts[0]); // [26]
+                    milliseconds = parseFloat(subParts[1]); // [630]
+                    totalSeconds = seconds + (milliseconds / 1000); // [26.630]
+
+                    totalMinutes = minutes + (totalSeconds / 60) + (hours * 60); // [0.43]
+                    totalMinutes = isNaN(totalMinutes) ? 0 : totalMinutes;
+
+                    console.log("millisecs " + milliseconds + ". secs " + seconds + ". minutes " + minutes + ". hours " + hours + ". total secs " + totalSeconds + ". total mins " + totalMinutes);
+
+                    return parseFloat(totalMinutes);
+                }
+
+                function getTimerTime() {
+                    
+                    var leftTime = convertTimeString(document.getElementById("left-boob-timer").innerText);
+                    var rightTime = convertTimeString(document.getElementById("right-boob-timer").innerText);
+
+                    var leftPump = convertTimeString(document.getElementById("left-pump-timer").innerText);
+                    var rightPump = convertTimeString(document.getElementById("right-pump-timer").innerText);
+
+                    return [leftTime, rightTime, leftPump, rightPump];
+
+                }
+
+                function startStopwatch(side) {
+
+                    if (side == "left") {
+                        startTimeLeft = Date.now() - elapsedTimeLeft;
+                        timerIntervalLeft = setInterval(function () {
                             updateStopwatch("left");
-                            startButtonLeft.disabled = false;
-                            stopButtonLeft.disabled = true;
-                        } else {
-                            clearInterval(timerIntervalRight);
-                            elapsedTimeRight = 0;
+                        }, 10);
+                        startButtonLeft.disabled = true;
+                        stopButtonLeft.disabled = false;
+                    } else if (side == "right"){
+                        startTimeRight = Date.now() - elapsedTimeRight;
+                        timerIntervalRight = setInterval(function () {
                             updateStopwatch("right");
-                            startButtonRight.disabled = false;
-                            stopButtonRight.disabled = true;
-                        }
+                        }, 10);
+                        startButtonRight.disabled = true;
+                        stopButtonRight.disabled = false;
+                    } else if (side == "left-pump"){
+                        startTimeLeftPump = Date.now() - elapsedTimeLeftPump;
+                        timerIntervalLeftPump = setInterval(function () {
+                            updateStopwatch("left-pump");
+                        }, 10);
+                        startButtonLeftPump.disabled = true;
+                        stopButtonLeftPump.disabled = false;
+                    } else if (side == "right-pump"){
+                        startTimeRightPump = Date.now() - elapsedTimeRightPump;
+                        timerIntervalRightPump = setInterval(function () {
+                            updateStopwatch("right-pump");
+                        }, 10);
+                        startButtonRightPump.disabled = true;
+                        stopButtonRightPump.disabled = false;
                     }
 
-                    function updateStopwatch(side) {
-                        if (side == "left") {
-                            console.log("updating left stop watch time - " + elapsedTimeLeft)
-                            elapsedTimeLeft = elapsedTimeLeft + 10; // not sure if this is the best way
-                            var milliseconds = elapsedTimeLeft % 1000;
-                            var seconds = Math.floor(elapsedTimeLeft / 1000) % 60;
-                            var minutes = Math.floor(elapsedTimeLeft / 60000) % 60;
-                            var hours = Math.floor(elapsedTimeLeft / 3600000);
+                }
 
-                            var timerTextLeft = hours.toString().padStart(2, "0") + ":" +
-                                minutes.toString().padStart(2, "0") + ":" +
-                                seconds.toString().padStart(2, "0") + "." +
-                                milliseconds.toString().padStart(3, "0");
-
-                            timerDisplayLeft.textContent = timerTextLeft;
-                        } else {
-                            elapsedTimeRight = elapsedTimeRight + 10; // not sure if this is the best way
-                            var milliseconds = elapsedTimeRight % 1000;
-                            var seconds = Math.floor(elapsedTimeRight / 1000) % 60;
-                            var minutes = Math.floor(elapsedTimeRight / 60000) % 60;
-                            var hours = Math.floor(elapsedTimeRight / 3600000);
-
-                            var timerTextRight = hours.toString().padStart(2, "0") + ":" +
-                                minutes.toString().padStart(2, "0") + ":" +
-                                seconds.toString().padStart(2, "0") + "." +
-                                milliseconds.toString().padStart(3, "0");
-
-                            timerDisplayRight.textContent = timerTextRight;
-                        }
+                function stopStopwatch(side) {
+                    if (side == "left") {
+                        clearInterval(timerIntervalLeft);
+                        elapsedTimeLeft = Date.now() - startTimeLeft;
+                        startButtonLeft.disabled = false;
+                        stopButtonLeft.disabled = true;
+                    } else if (side == "right"){
+                        clearInterval(timerIntervalRight);
+                        elapsedTimeRight = Date.now() - startTimeRight;
+                        startButtonRight.disabled = false;
+                        stopButtonRight.disabled = true;
+                    } else if (side == "left-pump"){
+                        clearInterval(timerIntervalLeftPump);
+                        elapsedTimeLeftPump = Date.now() - startTimeLeftPump;
+                        startButtonLeftPump.disabled = false;
+                        stopButtonLeftPump.disabled = true;
+                    } else if (side == "right-pump"){
+                        clearInterval(timerIntervalRightPump);
+                        elapsedTimeRightPump = Date.now() - startTimeRightPump;
+                        startButtonRightPump.disabled = false;
+                        stopButtonRightPump.disabled = true;
                     }
-                </script>
+                }
 
-            </div>
-            </div>
+                function resetStopwatch(side) {
+                    if (side == "left") {
+                        clearInterval(timerIntervalLeft);
+                        elapsedTimeLeft = 0;
+                        updateStopwatch("left");
+                        startButtonLeft.disabled = false;
+                        stopButtonLeft.disabled = true;
+                    } else if(side == "right"){
+                        clearInterval(timerIntervalRight);
+                        elapsedTimeRight = 0;
+                        updateStopwatch("right");
+                        startButtonRight.disabled = false;
+                        stopButtonRight.disabled = true;
+                    } else if(side == "left-pump"){
+                        clearInterval(timerIntervalLeftPump);
+                        elapsedTimeLeftPump = 0;
+                        updateStopwatch("left-pump");
+                        startButtonLeftPump.disabled = false;
+                        stopButtonLeftPump.disabled = true;
+                    } else if(side == "right-pump"){
+                        clearInterval(timerIntervalRightPump);
+                        elapsedTimeRightPump = 0;
+                        updateStopwatch("right-pump");
+                        startButtonRightPump.disabled = false;
+                        stopButtonRightPump.disabled = true;
+                    }
+                }
+
+                function updateStopwatch(side) {
+                    if (side == "left") {
+
+                        elapsedTimeLeft = elapsedTimeLeft + 10; // not sure if this is the best way
+                        var milliseconds = elapsedTimeLeft % 1000;
+                        var seconds = Math.floor(elapsedTimeLeft / 1000) % 60;
+                        var minutes = Math.floor(elapsedTimeLeft / 60000) % 60;
+                        var hours = Math.floor(elapsedTimeLeft / 3600000);
+
+                        var timerTextLeft = hours.toString().padStart(2, "0") + ":" +
+                            minutes.toString().padStart(2, "0") + ":" +
+                            seconds.toString().padStart(2, "0") + "." +
+                            milliseconds.toString().padStart(3, "0");
+
+                        timerDisplayLeft.textContent = timerTextLeft;
+                    } else if(side == "right") {
+                        elapsedTimeRight = elapsedTimeRight + 10; // not sure if this is the best way
+                        var milliseconds = elapsedTimeRight % 1000;
+                        var seconds = Math.floor(elapsedTimeRight / 1000) % 60;
+                        var minutes = Math.floor(elapsedTimeRight / 60000) % 60;
+                        var hours = Math.floor(elapsedTimeRight / 3600000);
+
+                        var timerTextRight = hours.toString().padStart(2, "0") + ":" +
+                            minutes.toString().padStart(2, "0") + ":" +
+                            seconds.toString().padStart(2, "0") + "." +
+                            milliseconds.toString().padStart(3, "0");
+
+                        timerDisplayRight.textContent = timerTextRight;
+                    }  else if(side == "left-pump") {
+                        elapsedTimeLeftPump = elapsedTimeLeftPump + 10; // not sure if this is the best way
+                        var milliseconds = elapsedTimeLeftPump % 1000;
+                        var seconds = Math.floor(elapsedTimeLeftPump / 1000) % 60;
+                        var minutes = Math.floor(elapsedTimeLeftPump / 60000) % 60;
+                        var hours = Math.floor(elapsedTimeLeftPump / 3600000);
+
+                        var timerTextLeftPump = hours.toString().padStart(2, "0") + ":" +
+                            minutes.toString().padStart(2, "0") + ":" +
+                            seconds.toString().padStart(2, "0") + "." +
+                            milliseconds.toString().padStart(3, "0");
+
+                        timerDisplayLeftPump.textContent = timerTextLeftPump;
+                    } else if(side == "right-pump") {
+                        elapsedTimeRightPump = elapsedTimeRightPump + 10; // not sure if this is the best way
+                        var milliseconds = elapsedTimeRightPump % 1000;
+                        var seconds = Math.floor(elapsedTimeRightPump / 1000) % 60;
+                        var minutes = Math.floor(elapsedTimeRightPump / 60000) % 60;
+                        var hours = Math.floor(elapsedTimeRightPump / 3600000);
+
+                        var timerTextRightPump = hours.toString().padStart(2, "0") + ":" +
+                            minutes.toString().padStart(2, "0") + ":" +
+                            seconds.toString().padStart(2, "0") + "." +
+                            milliseconds.toString().padStart(3, "0");
+
+                        timerDisplayRightPump.textContent = timerTextRightPump;
+                    }
+                }
+
+            </script>
 
             <input type="submit" value="Submit">
 
@@ -460,13 +603,13 @@
 
         slider.addEventListener("change", function (event) {
             const lang = event.target.checked ? "ru" : "en";
-            console.log(lang)
+
             const elements = document.querySelectorAll("[translation]")
             elements.forEach(function (element) {
-                console.log(element)
+
                 const key = element.innerHTML.trim();
                 const text = translations[lang][key];
-                console.log("key " + key + " text " + text);
+
                 element.innerHTML = text;
             });
         });

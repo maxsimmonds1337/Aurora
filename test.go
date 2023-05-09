@@ -9,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -57,9 +58,13 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 		<th scope="col">Time</th>
 		<th scope="col">Activities</th>
 		<th scope="col">Colour</th>
-		<th scope="col">Breast Milk Time</th>
-		<th scope="col">Bresat Milk mls</th>
-		<th scope="col">Formula Milk mls</th>
+		<th scope="col">Breast Milk (Time)</th>
+		<th scope="col">Breast Milk (mls)</th>
+		<th scope="col">Left Breast Feed (Time)</th>
+		<th scope="col">Right Breast Feed (Time)</th>
+		<th scope="col">Left Breast Pump (Time)</th>
+		<th scope="col">Right Breast Pump (Time)</th>
+		<th scope="col">Formula Milk (mls)</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -70,6 +75,12 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 				<td class ="centered">{{$row.Color}}</td>
 				<td class ="centered">{{$row.BreastMilkTime}}</td>
 				<td class ="centered">{{$row.BreastMilkMls}}</td>
+
+				<td class ="centered">{{$row.LeftMilkTime}}</td>
+				<td class ="centered">{{$row.RightMilkTime}}</td>
+				<td class ="centered">{{$row.LeftPumpTime}}</td>
+				<td class ="centered">{{$row.RightPumpTime}}</td>
+
 				<td class ="centered">{{$row.FormulaMilkMls}}</td>
 			</tr>
 		{{end}}
@@ -96,6 +107,10 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 		Color          string
 		BreastMilkTime []uint8
 		BreastMilkMls  []uint8
+		LeftMilkTime   []uint8
+		RightMilkTime  []uint8
+		LeftPumpTime   []uint8
+		RightPumpTime  []uint8
 		FormulaMilkMls []uint8
 	)
 
@@ -103,7 +118,7 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 	for rows.Next() {                     //this will loop over each element in the rows object
 		var row = make(map[string]interface{}) // declare a row which is a map of key strings and assorted values, but make it empty
 		// next, scan
-		if err := rows.Scan(&LogId, &BabyID, &Time, &Activities, &Color, &BreastMilkTime, &BreastMilkMls, &FormulaMilkMls); err != nil {
+		if err := rows.Scan(&LogId, &BabyID, &Time, &Activities, &Color, &BreastMilkTime, &BreastMilkMls, &LeftMilkTime, &RightMilkTime, &LeftPumpTime, &RightPumpTime, &FormulaMilkMls); err != nil {
 			log.Fatal(err)
 		}
 
@@ -114,6 +129,10 @@ func (app *App) data(w http.ResponseWriter, req *http.Request) {
 		row["Color"] = Color
 		row["BreastMilkTime"] = string(BreastMilkTime)
 		row["BreastMilkMls"] = string(BreastMilkMls)
+		row["RightMilkTime"] = string(RightMilkTime)
+		row["LeftMilkTime"] = string(LeftMilkTime)
+		row["LeftPumpTime"] = string(LeftPumpTime)
+		row["RightPumpTime"] = string(RightPumpTime)
 		row["FormulaMilkMls"] = string(FormulaMilkMls)
 
 		dataRows = append(dataRows, row)
@@ -258,7 +277,11 @@ func (app *App) insert_data(body_json []byte) {
 		Baby_id          int      `json:"baby_id"`
 		Activities       []string `json:"activities"`
 		Colour           string   `json:"colour"`
-		Breast_milk_time int      `json:"breast_milk_time"`
+		Breast_milk_time float32  `json:"breast_milk_time"`
+		Left_milk_time   float32  `json:"left_milk_time"`
+		Right_milk_time  float32  `json:"right_milk_time"`
+		Left_pump_time   float32  `json:"left_pump_time"`
+		Right_pump_time  float32  `json:"right_pump_time"`
 		Breast_milk_mls  int      `json:"breast_milk_mls"`
 		Formula_milk_mls int      `json:"formula_milk_mls"`
 		Time             string   `json:"time"`
@@ -270,8 +293,10 @@ func (app *App) insert_data(body_json []byte) {
 		log.Fatal(err)
 	}
 
+	// fmt.Printf("LPT - %v", baby_log.Left_pump_time)
+
 	// Prepare INSERT statement
-	stmt, err := app.DB.Prepare("INSERT INTO baby_logs (baby_id, time, activities, color, breast_milk_time, breast_milk_mls, formula_milk_mls) VALUES (?, ?, ?, ?, ?, ?, ?)")
+	stmt, err := app.DB.Prepare("INSERT INTO baby_logs (baby_id, time, activities, color, breast_milk_time, breast_milk_mls, left_milk_time, right_milk_time, left_pump_time, right_pump_time, formula_milk_mls) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -291,15 +316,21 @@ func (app *App) insert_data(body_json []byte) {
 	colour := baby_log.Colour
 	breast_milk_time := baby_log.Breast_milk_time
 	breast_milk_mls := baby_log.Breast_milk_mls
+	left_milk_time := baby_log.Left_milk_time
+	right_milk_time := baby_log.Right_milk_time
+	left_pump_time := baby_log.Left_pump_time
+	right_pump_time := baby_log.Right_pump_time
+
 	formula_milk_mls := baby_log.Formula_milk_mls
 	time := baby_log.Time
 
 	// Execute INSERT statement with values
-	_, err = stmt.Exec(baby_id, time, activities, colour, breast_milk_time, breast_milk_mls, formula_milk_mls)
+	_, err = stmt.Exec(baby_id, time, activities, colour, breast_milk_time, breast_milk_mls, left_milk_time, right_milk_time, left_pump_time, right_pump_time, formula_milk_mls)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	// fmt.Printf("got - baby_id %v, time %v, activities %v, colour %v, breast_milk_time %v, breast_milk_mls %v, left_milk_time %v, right_milk_time %v, left_pump_time %v, right_pump_time %v, formula_milk_mls %v", baby_id, time, activities, colour, breast_milk_time, breast_milk_mls, left_milk_time, right_milk_time, left_pump_time, right_pump_time, formula_milk_mls)
 	fmt.Println("Inserted data into baby_logs table.")
 
 }
@@ -340,8 +371,13 @@ func main() {
 
 	// Set up a file server to serve static files from the "static" directory
 	fs := http.FileServer(http.Dir("static"))
-	http.Handle("/", fs)
 
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if filepath.Ext(r.URL.Path) == ".js" {
+			w.Header().Set("Content-Type", "application/javascript")
+		}
+		fs.ServeHTTP(w, r)
+	})
 	http.ListenAndServe(":"+PORT, nil)
 
 }
