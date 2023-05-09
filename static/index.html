@@ -102,7 +102,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurora 🪐</title>
+    <title>Aurora 4.1🪐</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="./CSS/styles.css">
@@ -114,8 +114,12 @@
 
     <a href="https://www.redcross.org.uk/first-aid/learn-first-aid-for-babies-and-children/choking-baby">Baby CPR</a> ||
     <a href="tel:+111">Click to call 111 (Non Emergency line)</a> ||
-    <a href="tel:+999">Click to call 999 (Emergency line) for things like choking</a> ||
-    <a href="./dashboard.html">See the data!</a> <br>
+    <a href="tel:+999">Click to call 999 (Emergency line) for things like choking</a>
+
+    <br>
+    <br>
+    
+    <button onclick="location.href='./dashboard.html'">See the data!</button>
 
     <script>
 
@@ -123,6 +127,7 @@
         let cal_open = false;
 
         function SendData() {
+            console.log("function called")
 
             event.preventDefault(); // Prevent the form from submitting in the normal way
 
@@ -295,9 +300,9 @@
                     <h4>Left</h4>
                     <div id="left-boob-timer">0:00:00</div>
 
-                    <button id="startButtonLeft" enabled onclick="startStopwatch('left')">Start</button>
-                    <button id="stopButtonLeft" disabled onclick="stopStopwatch('left')">Stop</button>
-                    <button id="resetButtonLeft" enabled onclick="resetStopwatch('left')">Reset</button>
+                    <button id="startButtonLeft" type = "button" enabled onclick="startStopwatch('left')">Start</button>
+                    <button id="stopButtonLeft" type = "button" disabled onclick="stopStopwatch('left')">Stop</button>
+                    <button id="resetButtonLeft" type = "button" enabled onclick="resetStopwatch('left')">Reset</button>
 
                 </div>
 
@@ -306,9 +311,9 @@
                     <h4>Right</h4>
                     <div id="right-boob-timer">0:00:00</div>
 
-                    <button id="startButtonRight" enabled onclick="startStopwatch('right')">Start</button>
-                    <button id="stopButtonRight" disabled onclick="stopStopwatch('right')">Stop</button>
-                    <button id="resetButtonRight" enabled onclick="resetStopwatch('right')">Reset</button>
+                    <button id="startButtonRight" type = "button" enabled onclick="startStopwatch('right')">Start</button>
+                    <button id="stopButtonRight" type = "button" disabled onclick="stopStopwatch('right')">Stop</button>
+                    <button id="resetButtonRight" type = "button" enabled onclick="resetStopwatch('right')">Reset</button>
 
                 </div>
 
@@ -317,9 +322,9 @@
                     <h4>Left Pump</h4>
                     <div id="left-pump-timer">0:00:00</div>
 
-                    <button id="startButtonLeftPump" enabled onclick="startStopwatch('left-pump')">Start</button>
-                    <button id="stopButtonLeftPump" disabled onclick="stopStopwatch('left-pump')">Stop</button>
-                    <button id="resetButtonLeftPump" enabled onclick="resetStopwatch('left-pump')">Reset</button>
+                    <button id="startButtonLeftPump" type = "button" enabled onclick="startStopwatch('left-pump')">Start</button>
+                    <button id="stopButtonLeftPump" type = "button" disabled onclick="stopStopwatch('left-pump')">Stop</button>
+                    <button id="resetButtonLeftPump" type = "button" enabled onclick="resetStopwatch('left-pump')">Reset</button>
 
                 </div>
 
@@ -328,9 +333,9 @@
                     <h4>Right Pump</h4>
                     <div id="right-pump-timer">0:00:00</div>
 
-                    <button id="startButtonRightPump" enabled onclick="startStopwatch('right-pump')">Start</button>
-                    <button id="stopButtonRightPump" disabled onclick="stopStopwatch('right-pump')">Stop</button>
-                    <button id="resetButtonRightPump" enabled onclick="resetStopwatch('right-pump')">Reset</button>
+                    <button id="startButtonRightPump" type = "button" enabled onclick="startStopwatch('right-pump')">Start</button>
+                    <button id="stopButtonRightPump" type = "button" disabled onclick="stopStopwatch('right-pump')">Stop</button>
+                    <button id="resetButtonRightPump" type = "button" enabled onclick="resetStopwatch('right-pump')">Reset</button>
 
                 </div>
 
@@ -466,25 +471,26 @@
                     if (side == "left") {
                         clearInterval(timerIntervalLeft);
                         elapsedTimeLeft = 0;
-                        updateStopwatch("left");
+                        document.getElementById("left-boob-timer").innerText = "0:00:00";                        //updateStopwatch("left");
+                        console.log("this is after the text change")
                         startButtonLeft.disabled = false;
                         stopButtonLeft.disabled = true;
                     } else if(side == "right"){
                         clearInterval(timerIntervalRight);
                         elapsedTimeRight = 0;
-                        updateStopwatch("right");
+                        document.getElementById("right-boob-timer").innerText = "0:00:00";                        //updateStopwatch("left");
                         startButtonRight.disabled = false;
                         stopButtonRight.disabled = true;
                     } else if(side == "left-pump"){
                         clearInterval(timerIntervalLeftPump);
                         elapsedTimeLeftPump = 0;
-                        updateStopwatch("left-pump");
+                        document.getElementById("left-pump-timer").innerText = "0:00:00";                        //updateStopwatch("left");
                         startButtonLeftPump.disabled = false;
                         stopButtonLeftPump.disabled = true;
                     } else if(side == "right-pump"){
                         clearInterval(timerIntervalRightPump);
                         elapsedTimeRightPump = 0;
-                        updateStopwatch("right-pump");
+                        document.getElementById("right-pump-timer").innerText = "0:00:00";                        //updateStopwatch("left");
                         startButtonRightPump.disabled = false;
                         stopButtonRightPump.disabled = true;
                     }
